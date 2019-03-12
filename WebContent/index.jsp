@@ -9,7 +9,17 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<div id = "header">
+			<div id = "logo" style = "float: left">
+				Logo
+			</div>
+			<div id = "login" style = "float: right">
+				Login
+			</div>
+			<div id = "register" style = " margin-right: 10px;  float: right">
+				Register
+			</div>
+		</div>
 		<div id = "search-div">
 			<form class="form-inline mr-auto">
   				<input class="form-control mr-sm-2" type="text" placeholder="Leavey Library" aria-label="Search">
@@ -96,6 +106,76 @@
 	   					<option selected>Choose...</option>
 	   					<option value="Yes">Yes</option>
 	    			 	<option value="No">No</option>
+	  				</select>
+				</div>
+			</div >
+		</div>
+		<div id = "params4">
+			<div style = " float:left; margin-right: 40px;" id = "1" >
+				<div  class="input-group mb-3">
+	  				<div class="input-group-prepend">
+	   					 <label class="input-group-text" for="inputGroupSelect01">Hours(Open)</label>
+	  				</div>
+	 				<select class="custom-select" id="inputGroupSelect01">
+	   					<option selected>Choose...</option>
+	   					<option value="12am">12am</option>
+	    			 	<option value="1am">1am</option>
+	    			 	<option value="2am">2am</option>
+	    			 	<option value="2am">3am</option>
+	    			 	<option value="4am">4am</option>
+	    			 	<option value="5am">5am</option>
+	    			 	<option value="6am">6am</option>
+	    			 	<option value="7am">7am</option>
+	    			 	<option value="8am">8am</option>
+	    			 	<option value="9am">9am</option>
+	    			 	<option value="10am">10am</option>
+	    			 	<option value="11am">11am</option>
+	    			 	<option value="12am">12pm</option>
+	    			 	<option value="1am">1pm</option>
+	    			 	<option value="2am">2pm</option>
+	    			 	<option value="2am">3pm</option>
+	    			 	<option value="4am">4pm</option>
+	    			 	<option value="5am">5pm</option>
+	    			 	<option value="6am">6pm</option>
+	    			 	<option value="7am">7pm</option>
+	    			 	<option value="8am">8pm</option>
+	    			 	<option value="9am">9pm</option>
+	    			 	<option value="10am">10pm</option>
+	    			 	<option value="11am">11pm</option>
+	  				</select>
+				</div>
+			</div>
+			<div style=" float:left;">
+				<div class="input-group mb-3">
+	  				<div class="input-group-prepend" >
+	   					 <label class="input-group-text" for="inputGroupSelect01">Hours(Close)</label>
+	  				</div>
+	 				<select class="custom-select" id="inputGroupSelect01">
+	   					<option selected>Choose...</option>
+	   					<option value="12am">12am</option>
+	    			 	<option value="1am">1am</option>
+	    			 	<option value="2am">2am</option>
+	    			 	<option value="2am">3am</option>
+	    			 	<option value="4am">4am</option>
+	    			 	<option value="5am">5am</option>
+	    			 	<option value="6am">6am</option>
+	    			 	<option value="7am">7am</option>
+	    			 	<option value="8am">8am</option>
+	    			 	<option value="9am">9am</option>
+	    			 	<option value="10am">10am</option>
+	    			 	<option value="11am">11am</option>
+	    			 	<option value="12am">12pm</option>
+	    			 	<option value="1am">1pm</option>
+	    			 	<option value="2am">2pm</option>
+	    			 	<option value="2am">3pm</option>
+	    			 	<option value="4am">4pm</option>
+	    			 	<option value="5am">5pm</option>
+	    			 	<option value="6am">6pm</option>
+	    			 	<option value="7am">7pm</option>
+	    			 	<option value="8am">8pm</option>
+	    			 	<option value="9am">9pm</option>
+	    			 	<option value="10am">10pm</option>
+	    			 	<option value="11am">11pm</option>
 	  				</select>
 				</div>
 			</div >
