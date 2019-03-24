@@ -23,7 +23,7 @@ create table users(
 );
 
 create table reviews(
-	reviewID int(11) primary key,
+	reviewID int(11) primary key AUTO_INCREMENT,
 	userID int(11),
 	locationID int(11),
 	review varchar(200),
@@ -31,12 +31,11 @@ create table reviews(
 	overallRating int(3),
     FOREIGN KEY (userID) references users(userID)
 );
-create table reviews(
-	reviewID int(11) primary key,
-	userID int(11),
-	locationID int(11),
-	review varchar(200),
-	reviewPhotoURL varchar(2083),
-	overallRating int(3),
-    FOREIGN KEY (userID) references users(userID)
+
+create table favorites(
+	favoriteID int(11) primary key AUTO_INCREMENT,
+    userID int(11),
+    locationID int(11),
+    FOREIGN KEY (userID) references users(userID),
+    FOREIGN KEY (locationID) references studySpaces(locationID)
 );
