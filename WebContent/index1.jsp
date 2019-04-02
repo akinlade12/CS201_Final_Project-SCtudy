@@ -55,7 +55,7 @@
 		  				</select>
 					</div>
 				</div>
-//
+
 				<div style = " float:left; margin-right: 40px; margin-left: 40px;" id = "1">
 					<div class="input-group mb-3">
 	 						<div class="input-group-prepend" >
@@ -176,7 +176,7 @@
 	  				</select>
 				</div>
 			</div >
-//
+
 				
 			</div>
 		</div>
