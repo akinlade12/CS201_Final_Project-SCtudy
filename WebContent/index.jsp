@@ -8,16 +8,25 @@
 		<link rel="stylesheet" type="text/css" href="index.css" />
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
-	<body>
+	<body background="background.jpg">
+		<script>
+			
+		</script>
 		<div id = "header">
 			<div id = "logo" style = "float: left">
-				Logo
+				<a href="login.jsp" id = "logo" style = "color: black; float: left; font-family: Courier; font-size: 30px;">
+					Sctudy
+				</a>
 			</div>
 			<div id = "login" style = "float: right">
-				Login
+				<a href="login.jsp" id = "login" style = "color: black; float: right; margin-right: 1%; margin-top: 1%;">
+					Login
+				</a>
 			</div>
 			<div id = "register" style = " margin-right: 10px;  float: right">
-				Register
+				<a href="register.jsp" id = "register" style = "color: black; margin-right: 1%;  margin-top: 1%; float: right;">
+					Register
+				</a>
 			</div>
 		</div>
 		<div id = "search-div">
@@ -26,9 +35,15 @@
  				 <button class="btn btn-danger" type="submit">Search</button>
 			</form>
 		</div>
+		<div id="info">
+			*Check boxes of your required parameters
+		</div>
 		<div id = "params">
 			<div style = " float:left; margin-right: 40px;" id = "1">
 				<div class="input-group mb-3">
+					<div style = " margin-right: 10px; margin-top:5px">
+						<input type="checkbox" id = "outlets">
+					</div>
 	  				<div class="input-group-prepend" >
 	   					 <label class="input-group-text" for="inputGroupSelect01">Outlet Availability</label>
 	  				</div>
@@ -42,6 +57,9 @@
 			</div >
 			<div  style=" float:left;">
 				<div  class="input-group mb-3">
+				<div style = " margin-right: 10px; margin-top:5px">
+						<input type="checkbox" id = "seats">
+					</div>
 	  				<div class="input-group-prepend">
 	   					 <label class="input-group-text" for="inputGroupSelect01">Seating Types</label>
 	  				</div>
@@ -55,8 +73,11 @@
 			</div>
 		</div>
 		<div id = "params2">
-			<div style = " float:left; margin-right: 40px;" id = "1">
+			<div style = " float:left; margin-right: 75px;" id = "1">
 				<div class="input-group mb-3">
+					<div style = " margin-right: 10px; margin-top:5px">
+						<input type="checkbox" id = "lights">
+					</div>
 	  				<div class="input-group-prepend" >
 	   					 <label class="input-group-text" for="inputGroupSelect01">Light Source</label>
 	  				</div>
@@ -70,6 +91,9 @@
 			</div >
 			<div  style=" float:left;">
 				<div  class="input-group mb-3">
+					<div style = " margin-right: 10px; margin-top:5px">
+						<input type="checkbox" id = "noise">
+					</div>
 	  				<div class="input-group-prepend">
 	   					 <label class="input-group-text" for="inputGroupSelect01">Noise Scale</label>
 	  				</div>
@@ -85,8 +109,11 @@
 			</div>
 		</div>
 		<div id = "params3">
-			<div style = " float:left; margin-right: 40px;" id = "1" >
+			<div style = " float:left; margin-right: 56px;" id = "1" >
 				<div  class="input-group mb-3">
+					<div style = " margin-right: 10px; margin-top:5px">
+						<input type="checkbox" id = "inOrOut">
+					</div>
 	  				<div class="input-group-prepend">
 	   					 <label class="input-group-text" for="inputGroupSelect01">Indoor/Outdoor</label>
 	  				</div>
@@ -99,6 +126,9 @@
 			</div>
 			<div style=" float:left;">
 				<div class="input-group mb-3">
+					<div style = " margin-right: 10px; margin-top:5px">
+						<input type="checkbox" id = "cafe">
+					</div>
 	  				<div class="input-group-prepend" >
 	   					 <label class="input-group-text" for="inputGroupSelect01">Cafe Availability</label>
 	  				</div>
@@ -111,8 +141,11 @@
 			</div >
 		</div>
 		<div id = "params4">
-			<div style = " float:left; margin-right: 40px;" id = "1" >
+			<div style = " float:left; margin-right: 72px;" id = "1" >
 				<div  class="input-group mb-3">
+					<div style = " margin-right: 10px; margin-top:5px">
+						<input type="checkbox" id = "hoursOpen">
+					</div>
 	  				<div class="input-group-prepend">
 	   					 <label class="input-group-text" for="inputGroupSelect01">Hours(Open)</label>
 	  				</div>
@@ -147,6 +180,9 @@
 			</div>
 			<div style=" float:left;">
 				<div class="input-group mb-3">
+					<div style = " margin-right: 10px; margin-top:5px">
+						<input type="checkbox" id = "hoursClose">
+					</div>
 	  				<div class="input-group-prepend" >
 	   					 <label class="input-group-text" for="inputGroupSelect01">Hours(Close)</label>
 	  				</div>
