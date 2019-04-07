@@ -1,1 +1,40 @@
-@charset "UTF-8";
+.submit-div {
+	position: absolute;
+	top:37vh;
+	left:40vw;
+	right:20vw;
+
+}
+.params {
+	position:absolute;
+	top:45vh;
+	left:8vw;
+	right:2vw;
+}
+#params{
+	position: absolute;
+	 top:50%;
+	 left:20%;
+}
+
+#params2{
+	position: absolute;
+	 top:60%;
+	 left:20%;
+}
+
+#params3{
+	position: absolute;
+	 top:70%;
+	 left:20%;
+}
+
+#params4{
+	position: absolute;
+	 top:80%;
+	 left:20%;
+}
+
+
+
+
