@@ -1,15 +1,21 @@
 .submit-div {
 	position: absolute;
-	top:37vh;
-	left:40vw;
+	top:40vh;
+	left:45vw;
 	right:20vw;
-
+}
+#submitField {
+	position:fixed;
+	top:38vh;
+	width:30vw;
+	left:41.5vw;
 }
 .params {
 	position:absolute;
-	top:45vh;
-	left:8vw;
-	right:2vw;
+	top:10vh;
+	left:0;
+	right:0;
+	align: left;
 }
 #params{
 	position: absolute;

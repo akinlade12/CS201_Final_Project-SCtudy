@@ -23,7 +23,7 @@
 	<div class="submit">
 			<div class = "submit-div">
 				<form class="submitForm" action="submit" method="POST">
-	  				 <input id="submitField" class="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit">
+	  				 <input id="submitField" class="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit"><br>
 	  				 <input id="latitude" placeholder="Latitude">
 	  				 <input id="longitude" placeholder="Longitude">
 	 				 <button class="btn btn-danger" type="submit">Submit</button>
