@@ -2,6 +2,35 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		function validate2() {
+			$.ajax({
+				url: "login",
+				data: {
+					username: document.getElementById("username").value,
+					password: document.getElementById("password").value
+				},
+				success: function(result) {
+					if(result == "0"){
+						//username is taken
+						document.getElementById("errorMessage").innerHTML = "Invalid Username.";
+						return;
+					}
+					else if (result == "2"){
+						document.getElementById("errorMessage").innerHTML = "Password/Username do not match.";
+						return;
+					}
+					else if (result == "1"){
+						window.location.href="index.jsp";
+					}else {
+						console.log(result);
+						alert(result);
+					}
+				}
+			})
+		}
+	</script>
 	<head>
 		<meta charset="UTF-8">
 		<title>Login</title>
