@@ -9,7 +9,7 @@ public class StudySpace {
 	private String seats;
 	private String lights;
 	private int noise;
-	private Boolean inside; //false is outside, true is inside
+	private Boolean outside; //true is outside, false is inside
 	private Boolean cafe;
 	private String hourOpen;
 	private String hourClose;
@@ -31,7 +31,7 @@ public class StudySpace {
 		seats =s;
 		lights = l;
 		noise = noi;
-		inside = i;
+		outside = i;
 		cafe = c;
 		hourOpen = op;
 		hourClose = cl;
@@ -88,11 +88,11 @@ public class StudySpace {
 	public void setNoise(int noise) {
 		this.noise = noise;
 	}
-	public Boolean getInside() {
-		return inside;
+	public Boolean getOutside() {
+		return outside;
 	}
-	public void setInside(Boolean inside) {
-		this.inside = inside;
+	public void setOutside(Boolean outside) {
+		this.outside = outside;
 	}
 	public Boolean getCafe() {
 		return cafe;
