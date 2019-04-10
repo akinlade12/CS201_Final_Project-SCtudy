@@ -16,19 +16,19 @@ public class StudySpace {
 	private String phone;
 	private String address;
 	private String building;
-	
+	private double rating;
 	public StudySpace() {
 		
 	}
 	//construct using this one
 	public StudySpace(String n, double lon, double lat, String p, String o, String s, String l,
-			int noi, Boolean i, Boolean c, String op, String cl, String pho, String a, String b) {
+			int noi, Boolean i, Boolean c, String op, String cl, String pho, String a, String b, double r) {
 		name = n;
 		longitude = lon;
 		latitude = lat;
 		photoURL = p;
 		outlet = o;
-		seats =s;
+		seats = s;
 		lights = l;
 		noise = noi;
 		outside = i;
@@ -38,6 +38,7 @@ public class StudySpace {
 		phone = pho;
 		address = a;
 		building = b;
+		rating = r;
 	}
 	
 	public String getName() {
@@ -135,5 +136,11 @@ public class StudySpace {
 
 	public void setBuilding(String building) {
 		this.building = building;
+	}
+	public double getRating() {
+		return rating;
+	}
+	public void setRating(double rating) {
+		this.rating = rating;
 	}
 }

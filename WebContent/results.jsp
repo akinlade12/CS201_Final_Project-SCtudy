@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import = "java.util.ArrayList" %>
+<%@ page import = "main.StudySpace" %>
 <!DOCTYPE html>
 <%
 	ArrayList<String> list = (ArrayList<String>) session.getAttribute("list");
