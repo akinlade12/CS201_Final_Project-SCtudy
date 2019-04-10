@@ -199,3 +199,20 @@ img {
 	border-radius: 2vh;
 	object-fit: contain;
 }
+.circle {
+  width: 2vw;
+  height: 2vw;
+  border-radius: 50%;
+  font-size: 1.3vw;
+  color: black;
+  text-align: center;
+  background: #EA4335;
+  
+}
+#circlecontainer{
+  position: relative;
+  left: 56.5vw;
+  bottom: 24vh;
+  height: 0vh;
+  width: 0vw;
+}

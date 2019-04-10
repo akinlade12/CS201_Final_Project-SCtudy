@@ -4,17 +4,17 @@
 <%@ page import = "main.StudySpace" %>
 <!DOCTYPE html>
 <%
-	ArrayList<String> list = (ArrayList<String>) session.getAttribute("list");
-	Boolean zero = false;
+	StudySpace space1 = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
+			true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65);
+	ArrayList<StudySpace> spaces = new ArrayList<StudySpace>();
+	spaces.add(space1);
+	//ArrayList<StudySpace> spaces = (ArrayList<StudySpace>) session.getAttribute("results");  to be added once Toyosi's got search working
 	int size;
-	if(list == null || list.size() == 0){
+	if(spaces == null || spaces.size() == 0){
 		size = 0;
 	}
 	else{
-		size = list.size();
-	}
-	if(size == 0) {
-		zero = true;
+		size = spaces.size();
 	}
 %>
 <html>
@@ -25,33 +25,39 @@
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3d8Oblehwi3ISiykxRtGtqD0btZkWjIs"></script>
 	<script>
 		function initialize() {
+			var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			var labelIndex = 0;
 			var mapOptions = {
-					center: {lat: 34.022015, lng: -118.286314},
+					center: {lat: 34.023, lng: -118.286},
 					zoom: 16
 			};
 			var map = new google.maps.Map(document.getElementById('map'), mapOptions); //make map
-			var i;
 			var markerArray = [];
 			var infoArray = [];
-			for(i = 0; i < 2; i++) { //will change based on search results
-				if(i == 0) //will prob make array containing lat and long for each result
-					var pos = {lat: 34.023722, lng: -118.286513};
-				else
-					var pos = {lat: 34.020521, lng: -118.282951};
-				
+			var size = <%=size %>;
+			var i;
+			<% int k = 0; %>
+			for(i = 0; i < size; i++) { //will change based on search results
+				var latitude = <%= spaces.get(k).getLatitude()%>;
+				var longitude = <%= spaces.get(k).getLongitude()%>;
+				var pos = {lat: latitude, lng: longitude};
+				<% String refs = spaces.get(k).getName(); %>
+				var t = '<%= refs%>';
 				var marker = new google.maps.Marker({
 					position: pos,
 					map: map,
-					title: "Hello",
+					title: t,
+					label: labels[labelIndex++ % labels.length],
 				});
 				markerArray.push(marker);
-				
-				var contentString = '<a href="results.jsp">' + i + "</a>"; //will have to change href to details page and i to study space name
+				var contentString = '<a href="DetailsServlet?index=' + <%= k%> + '">' + t + '</a>';
 				var infowindow = new google.maps.InfoWindow({
 					content: contentString
 				});
 				
 				infoArray.push(infowindow);
+				
+				<% k++; %>
 			}
 			
 			function makeListener(index) {
@@ -61,7 +67,7 @@
 			    }
 			}
 			
-			for (var u=0; u<2; u++){ //again change 2 to number of results
+			for (var u=0; u<size; u++){ 
 			    google.maps.event.addListener(markerArray[u], 'click', makeListener(u));
 			}
 			document.getElementById("mapcontainer").style.background = 'flex';
@@ -84,7 +90,6 @@
 		</a>
 	</div>
 	<div id="Result">
-		Results for ""
 	</div>
 	<div id="toggle">
 		<label for="listbutton" class="buttonfont">
@@ -272,62 +277,93 @@
 		  <div id="map"></div>
 		</div>
 		<div id="list">
-			<script>
-				var val = <%= size%>;
-				if(val == 0) {
-					document.getElementById("result").innerHTML = "No Results Found.";
-					document.getElementById("resultscontainer").style.display = "none";
-				}
-				else {
-					document.getElementById("city").innerHTML = "Results";
-				}
-			</script>
 			<table>
 				<tbody id="thatbod">
 				<%
-					int i = 0;
-					while(i < 4) {
+					int i;
+					for(i = 0; i < size; i++) {
+						StudySpace space = spaces.get(i);
+						String ref = "DetailsServlet?index=" + Integer.toString(i);
+						int rating = (int) Math.round(space.getRating());
+						
+						String c;
+						if(space.getCafe())
+							c = "Yes";
+						else
+							c= "No";
+						
+						String o;
+						if(space.getOutside())
+							o = "Outdoors";
+						else
+							o = "Indoors";
 				%>
 					<tr>
 						<td>
 							<div class="picture">
-								<img src="bovard.jpg">
+								<img src=<%=space.getPhotoURL() %>>
 							</div>
-							<a class="title" href="results.jsp">Title texts</a>
+							<a class="title" href=<%=ref %>> <%= space.getName() %> </a>
 							<div class="review">
+								<%
+									int j;
+									for(j = 0; j < rating; j++) { 
+								%>
 								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
+								<%	}
+									while(j < 5) {
+								%>
 								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
+								<%
+										j++;
+									}
+								%>
+								
 							</div>
 							<div class="address">
-								<p>(213) 749-1813 </p>
-								<p>2528 S Figueroa St </p>
-								<p>SOS B4 </p>
+								<p><%=space.getPhone() %> </p>
+								<p><%=space.getAddress() %></p>
+								<p><%=space.getBuilding() %> </p>
 							</div>
 							<div class="params1">
-								<p class="params"> Hour Open: 8:00am </p>
-								<p class="params"> Hour Close: 5:00pm </p>
-								<p class="params"> Cafe: Yes </p>
-								<p class="params"> Indoor/Outdoor: Indoor </p>
+								<p class="params"> Hour Open: <%=space.getHourOpen() %> </p>
+								<p class="params"> Hour Close: <%=space.getHourClose() %> </p>
+								<p class="params"> Cafe: <%=c %> </p>
+								<p class="params"> In/Out: <%=o %> </p>
 							</div>
 							<div class="params2">
-								<p class="params"> Noise Level: 3 </p>
-								<p class="params"> Light Source: LED </p>
-								<p class="params"> Seating Type: Couch </p>
-								<p class="params"> Outlet Availability: Sparse </p>
+								<p class="params"> Noise Level: <%=space.getNoise()%> </p>
+								<p class="params"> Light Source: <%=space.getLights() %> </p>
+								<p class="params"> Seating Type: <%=space.getSeats() %> </p>
+								<p class="params"> Outlet Availability: <%=space.getOutlet() %> </p>
 							</div>
+							<% String ch = String.valueOf(Character.toChars(65+i));%>
+							<div id="circlecontainer">
+								<div class="circle">
+									<%=ch %>
+								</div>
+							</div>
+							
 						</td>
 					</tr>
 				<%
-					i++;
 						} 
 				%>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<script>
+		var val = <%= size%>;
+		if(val == 0) {
+			document.getElementById("Result").innerHTML = "No Results Found.";
+			document.getElementById("toggle").style.display = "none";
+			document.getElementById("resultscontainer").style.display = "none";
+		}
+		else {
+			document.getElementById("Result").innerHTML = "Results";
+		}
+	</script>
 	<script>
 	  	var list = document.getElementById("listbutton");
 	  	var map = document.getElementById("mapbutton");
