@@ -46,13 +46,13 @@ public class StudySpace {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public float getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 	public void setLongitude(float longitude) {
 		this.longitude = longitude;
 	}
-	public float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 	public void setLatitude(float latitude) {
