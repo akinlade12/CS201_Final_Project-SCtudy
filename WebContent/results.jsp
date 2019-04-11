@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <%
 	StudySpace space1 = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
-			true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65);
+			true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65, 5);
 	ArrayList<StudySpace> spaces = new ArrayList<StudySpace>();
 	spaces.add(space1);
 	//ArrayList<StudySpace> spaces = (ArrayList<StudySpace>) session.getAttribute("results");  to be added once Toyosi's got search working

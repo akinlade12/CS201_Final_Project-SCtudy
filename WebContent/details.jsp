@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="main.StudySpace" %>
+<% 
+	StudySpace currentSearch = (StudySpace) session.getAttribute("currentStudySpot");
+	StudySpace space1 = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
+		true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65);
+	
+	currentSearch = space1;
+%>
 <!DOCTYPE html>
 <html>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -75,7 +82,7 @@
 			<div class="n">Name</div>
 				<div class="b">
 		<!-- add on click functionality -->
-		<% 	if(session.getAttribute("loggedIn")){ %>
+		<% 	if((Boolean) session.getAttribute("loggedIn")){ %>
 					<button id="favorite" onclick="favorite()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Favorite</button>
 					<button id="review" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Write a Review</button>
 		<%	}  %>
@@ -83,9 +90,6 @@
 		</div>
 		<div class="overallRatings">
 			<table class="ratingTable">
-				<% 
-				StudySpace currentSearch = session.getAttribute("currentStudySpot");
-				%>
 				<tr>
 					<th> Overall Rating:</th>
 					<th><%= currentSearch.getRating() %></th>
