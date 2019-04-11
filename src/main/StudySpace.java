@@ -2,6 +2,7 @@ package main;
 
 public class StudySpace {
 	private String name;
+	private int locationID;
 	private double longitude;
 	private double latitude;
 	private String photoURL;
@@ -22,7 +23,7 @@ public class StudySpace {
 	}
 	//construct using this one
 	public StudySpace(String n, double lon, double lat, String p, String o, String s, String l,
-			int noi, Boolean i, Boolean c, String op, String cl, String pho, String a, String b, double r) {
+			int noi, Boolean i, Boolean c, String op, String cl, String pho, String a, String b, double r, int loc) {
 		name = n;
 		longitude = lon;
 		latitude = lat;
@@ -39,6 +40,7 @@ public class StudySpace {
 		address = a;
 		building = b;
 		rating = r;
+		locationID = loc;
 	}
 	
 	public String getName() {
@@ -142,5 +144,11 @@ public class StudySpace {
 	}
 	public void setRating(double rating) {
 		this.rating = rating;
+	}
+	public int getLocationID() {
+		return locationID;
+	}
+	public void setLocaitonID(int l) {
+		this.locationID = l;
 	}
 }
