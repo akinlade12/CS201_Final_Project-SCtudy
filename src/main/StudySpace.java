@@ -148,7 +148,7 @@ public class StudySpace {
 	public int getLocationID() {
 		return locationID;
 	}
-	public void setLocaitonID(int l) {
+	public void setLocationID(int l) {
 		this.locationID = l;
 	}
 }
