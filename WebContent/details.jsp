@@ -12,6 +12,30 @@
 <html>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
+		
+	// Get the button that opens the modal
+	var btn = document.getElementById("review");
+	// Get the <span> element that closes the modal
+
+	// When the user clicks the button, open the modal 
+	 function show() {
+			var modal = document.getElementById('myModal');
+			var span = document.getElementsByClassName("close")[0];
+	 		 modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	 function close1() {
+			var modal = document.getElementById('myModal');
+	  modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
 		function user(){
 			$.ajax({
 				url: "hack",
@@ -64,7 +88,27 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body background="background.jpg">
-		
+		<div id="myModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content">
+		    <span class="close" onclick ="close1()">&times;</span>
+		    <p>Submit a review</p>
+		    <form id = "rev"method="GET" action = "review">
+			    <textarea id = "reviewT" name = "reviewT" type = "text" style="height: 250px;" value = ""></textarea>
+			    <input type = "submit">
+			    <input id = "ratingT" name = "ratingT" type = "text" style = "display: none" value = <%=currentSearch.getRating()%>>
+			    <input id = "spaceID" name = "spaceID" type = "text" style = "display: none"value = <%=currentSearch.getLocationID() %>>
+			    Rating
+			    <select id = "rating" name = "rating">
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+				</select>
+		    </form>
+		  </div>
+		</div>
 		<!-- Persistent top bar -->
 		<div class="topBar">
 			<a class="logo" id="logo" href="index.jsp" style="text-decoration: none; color: black; display: inline-block; font-family: Courier">SCtudy</a>
