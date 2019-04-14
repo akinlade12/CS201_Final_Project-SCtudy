@@ -1,28 +1,35 @@
 .submit-div {
 	position: absolute;
-	top:40vh;
-	left:45vw;
+	top:20vh;
+	left:40vw;
 	right:20vw;
 }
-#submitField {
-	position:fixed;
-	top:38vh;
-	width:30vw;
-	left:41.5vw;
+button {
+	position:absolute;
+	align: center;
+	left:7vw;
+	top:59vh;
+}
+input {
+	width: 20vw;
+}
+#longitude {
+	width: 9.83vw;
+}
+#latitude {
+	width: 10vw;
 }
 .params {
-	position:absolute;
-	top:10vh;
-	left:0;
-	right:0;
+	position:fixed;
+	top:63vh;
+	left:10vw;
 	align: left;
 }
 #params{
 	position: absolute;
-	 top:50%;
-	 left:20%;
+	top:100px;
+	left:20%;
 }
-
 #params2{
 	position: absolute;
 	 top:60%;
