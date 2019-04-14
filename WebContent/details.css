@@ -67,3 +67,28 @@
 .b{
 	margin-top: -3%;
 }
+#resultscontainer{
+	position: absolute;
+	top: 8.7vh;
+	left: 50vw;
+	height: 60.3vh;
+	width: 40vw;
+	border-width: .15vw;
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 3vh;
+	background: rgb(128,128,128, 0.70);
+}
+#mapcontainer {
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+}
+#map {
+	width: 100%;
+	height: 100%;
+	z-index: 600;
+	border-radius: 3vh;
+}

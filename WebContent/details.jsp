@@ -3,14 +3,15 @@
 <%@ page import="main.StudySpace" %>
 <% 
 	StudySpace currentSearch = (StudySpace) session.getAttribute("currentStudySpot");
-	StudySpace space1 = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
-		true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65);
+	StudySpace space = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
+		true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65, 5);
 	
-	currentSearch = space1;
+	currentSearch = space;
 %>
 <!DOCTYPE html>
 <html>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3d8Oblehwi3ISiykxRtGtqD0btZkWjIs&callback=initialize"></script>
 	<script>
 		function user(){
 			$.ajax({
@@ -57,6 +58,55 @@
 		}
 		window.onload = user();
 	</script>
+	<script>
+		function initialize() {
+			var latitude = <%= space.getLatitude()%>;
+			var longitude = <%= space.getLongitude()%>;
+			var pos = {lat: latitude, lng: longitude};
+			var mapOptions = {
+					center: pos,
+					zoom: 16
+			};
+			var map = new google.maps.Map(document.getElementById('map'), mapOptions); //make map
+			
+			var i;
+			<% String refs = space.getName(); %>
+			var t = '<%= refs%>';
+			var marker = new google.maps.Marker({
+				position: pos,
+				map: map,
+				title: t,
+			});
+			
+			if (navigator.geolocation) { //puts marker at current position
+	          navigator.geolocation.getCurrentPosition(function(position) {
+	            var pos = {
+	              lat: position.coords.latitude,
+	              lng: position.coords.longitude
+	            };
+
+	            var marker = new google.maps.Marker({
+					position: pos,
+					map: map,
+					title: "Your Location",
+					icon: {
+						url: 'http://maps.google.com/mapfiles/ms/icons/arrow.png'
+					}
+				});
+	          }, function() {
+	            handleLocationError(true, infoWindow, map.getCenter());
+	          });
+	        } else {
+	          // Browser doesn't support Geolocation
+	          handleLocationError(false, infoWindow, map.getCenter());
+	        }
+		 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+		   	
+		    }
+			
+		}
+	</script>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>Study Spot</title>
@@ -82,10 +132,10 @@
 			<div class="n">Name</div>
 				<div class="b">
 		<!-- add on click functionality -->
-		<% 	if((Boolean) session.getAttribute("loggedIn")){ %>
+
 					<button id="favorite" onclick="favorite()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Favorite</button>
 					<button id="review" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Write a Review</button>
-		<%	}  %>
+	
 				</div>
 		</div>
 		<div class="overallRatings">
@@ -124,7 +174,14 @@
 				</tr>
 			</table>
 		</div>
-		
+		<div id="resultscontainer">
+			<div id="mapcontainer">
+		  		<div id="map"></div>
+			</div>
+		</div>
+		<script>
+			initialize();
+		</script>
 		<!-- Review Table: will ultimately put this in a for loop to list the proper amount of reviews -->
 		<div class="reviews">
 			<table class = "reviewTable">

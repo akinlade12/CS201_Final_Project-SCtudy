@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <%
 	StudySpace space1 = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
-			true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65, 5);
+			true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65, 6);
 	ArrayList<StudySpace> spaces = new ArrayList<StudySpace>();
 	spaces.add(space1);
 	//ArrayList<StudySpace> spaces = (ArrayList<StudySpace>) session.getAttribute("results");  to be added once Toyosi's got search working
@@ -59,7 +59,32 @@
 				
 				<% k++; %>
 			}
-			
+			if (navigator.geolocation) { //puts marker at current position
+	          navigator.geolocation.getCurrentPosition(function(position) {
+	            var pos = {
+	              lat: position.coords.latitude,
+	              lng: position.coords.longitude
+	            };
+
+	            var marker = new google.maps.Marker({
+					position: pos,
+					map: map,
+					title: "Your Location",
+					icon: {
+						url: 'http://maps.google.com/mapfiles/ms/icons/arrow.png'
+					}
+				});
+	          }, function() {
+	            handleLocationError(true, infoWindow, map.getCenter());
+	          });
+	        } else {
+	          // Browser doesn't support Geolocation
+	          handleLocationError(false, infoWindow, map.getCenter());
+	        }
+		 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+		        
+		      }
+				 
 			function makeListener(index) {
 			    return function() {
 			        infoArray[index].disableAutoPan=true;
