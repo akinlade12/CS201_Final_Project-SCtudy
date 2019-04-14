@@ -60,7 +60,7 @@ public class review extends HttpServlet {
 	    try {
 	    	
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=Toyosi12");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=root");
 	    	st = conn.createStatement();
 	    	rs = st.executeQuery("SELECT * from studySpaces");
 	    	while(rs.next()) {
