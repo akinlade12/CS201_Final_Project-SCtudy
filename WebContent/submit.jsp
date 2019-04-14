@@ -7,7 +7,7 @@
 	<title>Submit</title>
 	<link rel="stylesheet" type="text/css" href="submit.css" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
+	</head>
 <body background="background.jpg">
 	<div id = "header">
 		<a href="login.jsp" id = "logo" style = "color: black; float: left; font-family: Courier; font-size: 30px;">
@@ -23,10 +23,25 @@
 	<div class="submit">
 			<div class = "submit-div">
 				<form class="submitForm" action="submit" method="POST">
-	  				 <input id="submitField" class="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit"><br>
-	  				 <input id="latitude" placeholder="Latitude">
-	  				 <input id="longitude" placeholder="Longitude">
-	 				 <button class="btn btn-danger" type="submit">Submit</button>
+	  				 <input id="submitField" class="submitField" name="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit"><br><br>
+	  				 <input id="latitude" type="text" placeholder="Latitude" name="latitude">
+	  				 <input id="longitude" type="text" placeholder="Longitude" name="longitude"><br><br>
+	  				 <input id="photoURL" type="text" placeholder="Link to Photo" name="photoURL"><br><br>
+	  				 <input id="address" type="text" placeholder="Address" name="address"><br><br>
+	  				 <input id="buildingCode" type="text" placeholder="Building Code" name="buildingCode"><br><br>
+	  				 <input id="phoneNumber" type="text" placeholder="Phone Number" name="phoneNumber"><br><br>
+	  				 <input type="hidden" id="outletsForm" name="outletsForm" value="">
+	  				 <input type="hidden" id="seatsForm" name="seatsForm" value="">
+	  				 <input type="hidden" id="lightsForm" name="lightsForm" value="">
+	  				 <input type="hidden" id="noiseForm" name="noiseForm" value="">
+	  				 <input type="hidden" id="inOrOutForm" name="inOrOutForm" value="">
+	  				 <input type="hidden" id="cafeForm" name="cafeForm" value="">
+	  				 <input type="hidden" id="hourOpenForm" name="hourOpenForm" value="">
+	  				 <input type="hidden" id="hourCloseForm" name="hourCloseForm" value="">
+	  				 
+	  				 
+	 				<button class="btn btn-danger" onclick="submitForm()" id="submitButton">Submit</button>
+					
 					<div class = "params">
 						<div style = " float:left;" id = "1">
 							<div class="input-group mb-3">
@@ -178,11 +193,26 @@
 					</div >
 				</div>
 			</form>
-		</div>
-				
-
-				
+		</div>				
 	</div>
 	
 </body>
+<script>
+	document.getElementById("submitButton").addEventListener("click", function submitValues() {
+		var form = document.getElementById("submitForm");
+		
+		document.getElementById("outletsForm").value = document.getElementById("outletAvailability").value;
+		document.getElementById("seatsForm").value = document.getElementById("seatingTypes").value;
+		document.getElementById("lightsForm").value = document.getElementById("lightingTypes").value;
+		document.getElementById("noiseForm").value = document.getElementById("noiseLevel").value;
+		document.getElementById("inOrOutForm").value = document.getElementById("indoorOutdoor").value;
+		document.getElementById("cafeForm").value = document.getElementById("cafeAvailability").value;
+		document.getElementById("hourOpenForm").value = document.getElementById("hourOpen").value;
+		document.getElementById("hourCloseForm").value = document.getElementById("hourClose").value;
+		
+		console.log("YOU HAVE REACHED HERE ! ");
+		
+		form.submit(); 		
+	});
+</script>
 </html>
