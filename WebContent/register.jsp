@@ -15,7 +15,7 @@
 				data: {
 					username: document.getElementById("username").value,
 					password: document.getElementById("password").value,
-					recPassword: document.getElementById("recPassword").value
+					recPassword: document.getElementById("recPassword").value,
 					about: document.getElementById("about").value
 				},
 				success: function(result) {

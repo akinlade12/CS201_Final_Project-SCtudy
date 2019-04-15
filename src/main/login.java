@@ -34,6 +34,17 @@ public class login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session=request.getSession();
+		
+		String log = request.getParameter("loggedout"); 
+		
+		if(log != null) {
+			session.setAttribute("loggedIn", false);
+			session.setAttribute("username", null);
+			session.setAttribute("about", null);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
+		}
 		System.out.println("in login.java");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -60,7 +71,6 @@ public class login extends HttpServlet {
 				Integer userNum = rs.getInt("userID");
 				String about = rs.getString("about");
 				
-				HttpSession session=request.getSession();
 		        session.setAttribute("user", userNum); 
 		        session.setAttribute("username", username);
 		        session.setAttribute("loggedIn", true);

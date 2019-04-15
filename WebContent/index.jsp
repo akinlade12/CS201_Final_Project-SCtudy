@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<% Boolean logged = (Boolean) session.getAttribute("loggedIn");%>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="index.css" />
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
@@ -13,26 +15,48 @@
 			
 		</script>
 		<div id = "header">
-			<div id = "logo" style = "float: left">
-				<a href="login.jsp" id = "logo" style = "color: black; float: left; font-family: Courier; font-size: 30px;">
-					Sctudy
-				</a>
-			</div>
+			<a href="index.jsp" id = "logo">
+				Sctudy
+			</a>
 			<div id="out">
-				<div id = "login" style = "float: right">
-					<a href="login.jsp" id = "login" style = "color: black; float: right; margin-right: 1%; margin-top: 1%;">
+				<div class ="upper" id = "login">
+					<a href="login.jsp" id = "login" >
 						Login
 					</a>
 				</div>
-				<div id = "register" style = " margin-right: 10px;  float: right">
-					<a href="register.jsp" id = "register" style = "color: black; margin-right: 1%;  margin-top: 1%; float: right;">
+				<div class ="upper"id = "register">
+					<a href="register.jsp" id = "register" >
 						Register
 					</a>
 				</div>
 			</div>
 			<div id="in">
-				
+				<div class ="upper" id = "profile">
+					<a href="profile.jsp" id = "login" >
+						Profile
+					</a>
+				</div>
+				<div class ="upper" id = "logout">
+					<a href="login?loggedout=true" id = "register">
+						Log Out
+					</a>
+				</div>
 			</div>
+			<script>
+				var logged = <%= logged%>;
+				if(logged == null) {
+					$("#in").hide();
+					$("#out").show();
+				}	
+				else if(logged) {
+					$("#out").hide();
+					$("#in").show();
+				}
+				else if(!logged) {
+					$("#in").hide();
+					$("#out").show();
+				}
+			</script>
 		</div>
 		<div id = "search-div">
 			<form class="submitForm" action="Index" method="POST">

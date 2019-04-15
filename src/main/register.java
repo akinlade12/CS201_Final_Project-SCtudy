@@ -80,11 +80,12 @@ public class register extends HttpServlet {
 		        session.setAttribute("username", username);
 		        session.setAttribute("loggedIn", true);
 		        session.setAttribute("about", about);
-		        
+		        System.out.println("here");
 		        response.getWriter().write("1");
 		        RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/index.jsp");
 		        dispatch.forward(request, response);
-		        session.getAttribute("user"); //will return user number
+		        //session.getAttribute("user"); //will return user number
+		        //System.out.println("here too");
 			}
 			
 		} catch (SQLException sqle) {
