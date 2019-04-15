@@ -42,7 +42,7 @@ public class login extends HttpServlet {
 		PreparedStatement ps = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); //throws classNotFound exception 
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=rhYdgpK1998!&serverTimezone=UTC");		
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root&serverTimezone=UTC");		
 			ps = conn.prepareStatement("SELECT * FROM sctudy.users WHERE username=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();

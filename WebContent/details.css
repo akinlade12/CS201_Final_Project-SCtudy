@@ -28,6 +28,10 @@
 	font-size: 50px;
 	font-weight: bold;
 	color: black;
+	border-width: .15vw;
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 3vh;
 }
 .ratingTable{
 	display: block;
@@ -65,15 +69,17 @@
 	margin-bottom: 0;
 }
 .b{
-	margin-top: -3%;
+	position: absolute;
+	left: 20vw;
+	top: 20vh;
 }
 
 #resultscontainer{
 	position: absolute;
 	top: 8.7vh;
 	left: 50vw;
-	height: 60.3vh;
-	width: 40vw;
+	height: 55vh;
+	width: 35vw;
 	border-width: .15vw;
 	border-color: #49669D;
 	border-style: solid;

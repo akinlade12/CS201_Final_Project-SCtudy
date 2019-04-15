@@ -1,3 +1,4 @@
+package main;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -36,8 +37,9 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
-		String nextPage = "/index.jsp";
+		String nextPage = "/results.jsp";
 		Connection conn = null;
 	    Statement st = null;
 	    ResultSet rs = null;
@@ -68,10 +70,11 @@ public class Index extends HttpServlet {
 	    Vector<Integer> numbMatches = new Vector<>();
 	    try {
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=Toyosi12");
-	    	
+	    	System.out.println("HIIII2");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sctudy?user=root&password=root"); 
 	    	st = conn.createStatement();
-	    	rs = st.executeQuery("SELECT * from studySpaces");
+	    	rs = st.executeQuery("SELECT * from studyspaces");
+	    	
 	    	while(rs.next()) {
 	    		// changes to true if desired parameter is required but study space does not have parameter
 	    		Boolean dontAdd = false;
@@ -219,7 +222,7 @@ public class Index extends HttpServlet {
 	    		if(studySpaceIds.contains(rs2.getObject(1))) {
 	    		StudySpace ss = new StudySpace((String)rs2.getObject(2),(double)rs2.getObject(5), (double)rs2.getObject(4),(String)rs2.getObject(3),
 	    				(String)rs2.getObject(13),(String)rs2.getObject(6),(String)rs2.getObject(7), (int)rs2.getObject(8),(Boolean)rs2.getObject(12),(Boolean)rs2.getObject(9), 
-	    				(String)rs2.getObject(10), (String)rs2.getObject(11),"not in database", "not in database", "not in database", (double)rs2.getObject(14));
+	    				(String)rs2.getObject(10), (String)rs2.getObject(11),"not in database", "not in database", "not in database", (double)rs2.getObject(14), (int)rs2.getObject(1));
 	    			studySpaces.add(ss);
 	    		}
 	    		
@@ -227,11 +230,11 @@ public class Index extends HttpServlet {
 	    	
 	    	// set session variable to studySpaces vector
 	    	session.setAttribute("studySpaces", studySpaces);
-	    	
+	    	System.out.println(studySpaces.size());
 	    } catch (SQLException sqle) {
 	    	System.out.println (sqle.getMessage());
 	    } catch (ClassNotFoundException cnfe) {
-	    	System.out.println (cnfe.getMessage());
+	    	System.out.println (cnfe.getMessage()) ;
 	    } finally {
 	    	try {
 	    		if (rs != null) {

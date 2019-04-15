@@ -1,6 +1,7 @@
 package main;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,8 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
+
 
 /**
  * Servlet implementation class hack
@@ -33,10 +35,10 @@ public class hack extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		HttpSession session=request.getSession();
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("checkStatus")) {
-			boolean loggedIn = session.getAttribute("loggedIn");
+			boolean loggedIn = (Boolean) session.getAttribute("loggedIn");
 			response.getWriter().write(Boolean.toString(loggedIn));
 		} else if (action.equalsIgnoreCase("signOut")) {
 			
@@ -50,10 +52,10 @@ public class hack extends HttpServlet {
 			PreparedStatement ps = null;
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver"); //throws classNotFound exception 
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=rhYdgpK1998!&serverTimezone=UTC");		
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root&serverTimezone=UTC");		
 				ps = conn.prepareStatement("INSERT INTO sctudy.favorites (userID, locationID) VALUES  (?, ?)");
-				String userID = session.getAttribute("user");
-				int loc = session.getAttribute("currentStudySpot").getLocationID;
+				String userID = (String) session.getAttribute("user");
+				int loc = ((StudySpace) session.getAttribute("currentStudySpot")).getLocationID();
 				String locationID = Integer.toString(loc);
 				ps.setString(1, userID);
 				ps.setString(2, locationID);

@@ -24,7 +24,7 @@ public class profile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String SQL_USERNAME = "root";
-	private static final String SQL_PASSWORD = "bigOfor201";
+	private static final String SQL_PASSWORD = "root";
 	private static String errorMessage;
 	
 	Connection conn;

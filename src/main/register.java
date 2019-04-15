@@ -48,7 +48,7 @@ public class register extends HttpServlet {
 			//FileIO fio = new FileIO(getServletContext().getRealPath("/weather.txt")); replace with json parse
 			Class.forName("com.mysql.cj.jdbc.Driver"); //throws classNotFound exception 
 			System.out.println("in try block");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=rhYdgpK1998!&serverTimezone=UTC");		
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root&serverTimezone=UTC");		
 			ps = conn.prepareStatement("SELECT * FROM sctudy.users WHERE username=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -77,9 +77,9 @@ public class register extends HttpServlet {
 		        session.setAttribute("loggedIn", true);
 		        
 		        response.getWriter().write("1");
-		        //RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/index.jsp");
-		        //dispatch.forward(request, response);
-		        //session.getAttribute("user") will return user number
+		        RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/index.jsp");
+		        dispatch.forward(request, response);
+		        session.getAttribute("user"); //will return user number
 			}
 			
 		} catch (SQLException sqle) {

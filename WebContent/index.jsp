@@ -30,7 +30,7 @@
 			</div>
 		</div>
 		<div id = "search-div">
-			<form class="form-inline mr-auto">
+			<form action="Index" class="form-inline mr-auto">
   				<input class="form-control mr-sm-2" type="text" placeholder="Leavey Library" aria-label="Search">
  				 <button class="btn btn-danger" type="submit">Search</button>
 			</form>
