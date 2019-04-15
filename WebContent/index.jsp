@@ -30,9 +30,27 @@
 			</div>
 		</div>
 		<div id = "search-div">
-			<form action="Index" class="form-inline mr-auto">
-  				<input class="form-control mr-sm-2" type="text" placeholder="Leavey Library" aria-label="Search">
- 				 <button class="btn btn-danger" type="submit">Search</button>
+			<form class="submitForm" action="Index" method="POST">
+	  			<input id="submitField" class="submitField" name="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit"><br><br>
+  				<input type="hidden" id="outletsForm" name="outletsForm" value="">
+  				<input type="hidden" id="seatsForm" name="seatsForm" value="">
+  				<input type="hidden" id="lightsForm" name="lightsForm" value="">
+  				<input type="hidden" id="noiseForm" name="noiseForm" value="">
+  				<input type="hidden" id="inOrOutForm" name="inOrOutForm" value="">
+  				<input type="hidden" id="cafeForm" name="cafeForm" value="">
+  				<input type="hidden" id="hourOpenForm" name="hourOpenForm" value="">
+  				<input type="hidden" id="hourCloseForm" name="hourCloseForm" value="">
+  				
+  				<input type="hidden" id="outletsBoxForm" name="outletsBoxForm" value="">
+  				<input type="hidden" id="seatsBoxForm" name="seatsBoxForm" value="">
+  				<input type="hidden" id="lightsBoxForm" name="lightsBoxForm" value="">
+  				<input type="hidden" id="noiseBoxForm" name="noiseBoxForm" value="">
+  				<input type="hidden" id="inOrOutBoxForm" name="inOrOutBoxForm" value="">
+  				<input type="hidden" id="cafeBoxForm" name="cafeBoxForm" value="">
+  				<input type="hidden" id="hoursOpenBoxForm" name="hoursOpenBoxForm" value="">
+  				<input type="hidden" id="hoursCloseBoxForm" name="hoursCloseBoxForm" value="">
+ 				
+ 				<button class="btn btn-danger" id="submitButton" onclick="submitValues()">Search</button>
 			</form>
 		</div>
 		<div id="info">
@@ -47,7 +65,7 @@
 	  				<div class="input-group-prepend" >
 	   					 <label class="input-group-text" for="inputGroupSelect01">Outlet Availability</label>
 	  				</div>
-	 				<select class="custom-select" id="inputGroupSelect01">
+	 				<select class="custom-select" id="outletAvailability">
 	   					<option selected>Choose...</option>
 	   					<option value="Sparse">Sparse</option>
 	    			 	<option value="Available">Available</option>
@@ -63,7 +81,7 @@
 	  				<div class="input-group-prepend">
 	   					 <label class="input-group-text" for="inputGroupSelect01">Seating Types</label>
 	  				</div>
-	 				<select class="custom-select" id="inputGroupSelect01">
+	 				<select class="custom-select" id="seatingTypes">
 	   					<option selected>Choose...</option>
 	   					<option value="Couch">Couch</option>
 	    			 	<option value="Chair">Chair</option>
@@ -81,7 +99,7 @@
 	  				<div class="input-group-prepend" >
 	   					 <label class="input-group-text" for="inputGroupSelect01">Light Source</label>
 	  				</div>
-	 				<select class="custom-select" id="inputGroupSelect01">
+	 				<select class="custom-select" id="lightingTypes">
 	   					<option selected>Choose...</option>
 	   					<option value="LED">LED</option>
 	    			 	<option value="Windows">Windows</option>
@@ -97,7 +115,7 @@
 	  				<div class="input-group-prepend">
 	   					 <label class="input-group-text" for="inputGroupSelect01">Noise Scale</label>
 	  				</div>
-	 				<select class="custom-select" id="inputGroupSelect01">
+	 				<select class="custom-select" id="noiseLevel">
 	   					<option selected>Choose...</option>
 	   					<option value="1">1</option>
 	    			 	<option value="2">2</option>
@@ -117,7 +135,7 @@
 	  				<div class="input-group-prepend">
 	   					 <label class="input-group-text" for="inputGroupSelect01">Indoor/Outdoor</label>
 	  				</div>
-	 				<select class="custom-select" id="inputGroupSelect01">
+	 				<select class="custom-select" id="indoorOutdoor">
 	   					<option selected>Choose...</option>
 	   					<option value="Indoor">Indoor</option>
 	    			 	<option value="Outdoor">Outdoor</option>
@@ -132,7 +150,7 @@
 	  				<div class="input-group-prepend" >
 	   					 <label class="input-group-text" for="inputGroupSelect01">Cafe Availability</label>
 	  				</div>
-	 				<select class="custom-select" id="inputGroupSelect01">
+	 				<select class="custom-select" id="cafeAvailability">
 	   					<option selected>Choose...</option>
 	   					<option value="Yes">Yes</option>
 	    			 	<option value="No">No</option>
@@ -149,7 +167,7 @@
 	  				<div class="input-group-prepend">
 	   					 <label class="input-group-text" for="inputGroupSelect01">Hours(Open)</label>
 	  				</div>
-	 				<select class="custom-select" id="inputGroupSelect01">
+	 				<select class="custom-select" id="hourOpen">
 	   					<option selected>Choose...</option>
 	   					<option value="12am">12am</option>
 	    			 	<option value="1am">1am</option>
@@ -186,7 +204,7 @@
 	  				<div class="input-group-prepend" >
 	   					 <label class="input-group-text" for="inputGroupSelect01">Hours(Close)</label>
 	  				</div>
-	 				<select class="custom-select" id="inputGroupSelect01">
+	 				<select class="custom-select" id="hourClose">
 	   					<option selected>Choose...</option>
 	   					<option value="12am">12am</option>
 	    			 	<option value="1am">1am</option>
@@ -218,4 +236,31 @@
 		</div>
 		
 	</body>
+<script>
+	document.getElementById("submitButton").addEventListener("click", function submitValues() {
+		var form = document.getElementById("submitForm");
+		
+		document.getElementById("outletsForm").value = document.getElementById("outletAvailability").value;
+		document.getElementById("seatsForm").value = document.getElementById("seatingTypes").value;
+		document.getElementById("lightsForm").value = document.getElementById("lightingTypes").value;
+		document.getElementById("noiseForm").value = document.getElementById("noiseLevel").value;
+		document.getElementById("inOrOutForm").value = document.getElementById("indoorOutdoor").value;
+		document.getElementById("cafeForm").value = document.getElementById("cafeAvailability").value;
+		document.getElementById("hourOpenForm").value = document.getElementById("hourOpen").value;
+		document.getElementById("hourCloseForm").value = document.getElementById("hourClose").value;
+		
+		document.getElementById("outletsBoxForm").value = document.getElementById("outlets").checked;
+		document.getElementById("seatsBoxForm").value = document.getElementById("seats").checked;
+		document.getElementById("lightsBoxForm").value = document.getElementById("lights").checked;
+		document.getElementById("noiseBoxForm").value = document.getElementById("noise").checked;
+		document.getElementById("inOrOutBoxForm").value = document.getElementById("inOrOut").checked;
+		document.getElementById("cafeBoxForm").value = document.getElementById("cafe").checked;
+		document.getElementById("hoursOpenBoxForm").value = document.getElementById("hoursOpen").checked;
+		document.getElementById("hoursCloseBoxForm").value = document.getElementById("hoursClose").checked;
+		
+		console.log("YOU HAVE REACHED HERE ! ");
+		
+		form.submit(); 		
+	});
+</script>
 </html>
