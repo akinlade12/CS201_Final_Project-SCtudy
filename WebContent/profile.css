@@ -28,7 +28,7 @@
 #resultscontainer{
 	position: absolute;
 	top: 18.7vh;
-	left: 21vw;
+	left: 35vw;
 	height: 80.3vh;
 	width: 60vw;
 	border-width: .15vw;
@@ -64,10 +64,10 @@
 	font-size: 2.5vh;
 }
 #Favorite{
-	font-size: 5vh;
+	font-size: 4vh;
 	position: absolute;
-	left: 30vw;
-	top: 10vh;
+	left: 62vw;
+	top: 12vh;
 }
 
 tr{
@@ -130,6 +130,8 @@ a{
 	height: 0vh;
 	bottom: 14vh;
 	left: 16vw;
+	max-width: 12vw;
+	font-size: 1.8vh;
 }
 .params1{
 	position: relative;
@@ -140,7 +142,7 @@ a{
 .params2{
 	position: relative;
 	bottom: 23vh;
-	left: 43vw;
+	left: 41vw;
 	height: 0vh;
 }
 .params{
@@ -168,4 +170,68 @@ img {
   bottom: 24vh;
   height: 0vh;
   width: 0vw;
+}
+#sidebar{
+	background: rgb(128,128,128, 0.50);
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	top: 19vh;
+	left:3vw;
+	height: 80vh;
+	width: 23vw;
+	border-width: .15vw;
+	border-color: #f199e6;
+	border-style: solid;
+	border-radius: 2vw;
+	align-items: center;
+	justify-content: top;
+}
+#prof{
+	font-size: 5vh;
+	position: absolute;
+	left: 7vw;
+	top: 11vh;
+}
+#piccontainer{
+	position: relative;
+	top: 5vh;
+	width: 80%;
+	border-width: .15vw;
+	border-color: #f199e6;
+	border-style: solid;
+	border-radius: 10px;
+}
+#infocontainer{
+	border-width: .15vw;
+	border-color: #f199e6;
+	border-bottom-right-radius: 2vw;
+	border-bottom-left-radius: 2vw;
+	background-color: #F0F0F0;
+	width: 100%;
+	height: 43.4vh;
+	top: 10vh;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: top;
+	align-items: left;
+}
+#name{
+	font-size: 4vh;
+	position: relative;
+	top: 1vh;
+	left: 1vw;
+}
+#location{
+	font-size: 2.5vh;
+	position: relative;
+	top: 1vh;
+	left: 1vw;
+}
+#about{
+	position: relative;
+	top: 3vh;
+	left: 1vw;
+	max-width: 90%;
 }

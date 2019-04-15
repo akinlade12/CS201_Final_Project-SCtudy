@@ -22,6 +22,7 @@
 	if (session.getAttribute("loggedIn") != null) {
 		username = (String) session.getAttribute("username");
 	}
+	String about = "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ";
 %>
 <html>
 <head>
@@ -29,7 +30,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="profile.css" />
 <meta charset="UTF-8">
-<title>SCtudy</title>
+<title><%=username %>'s Profile</title>
 </head>
 <body background="background.jpg">
 	<div id = "header">
@@ -43,9 +44,20 @@
 			Register
 		</a>
 	</div>
-	
-	<div id="Favorite"><%= username + "'s" %> Favorites</div>
-		
+	<div id="prof">Profile Summary</div>
+	<div id="sidebar">
+		<div id="piccontainer">
+			<img id="profilepic" src="bovard.jpg">
+		</div>
+		<div id="infocontainer">
+			<div id="name"><%=username%></div>
+			<div id="location">Los Angeles</div>
+			<div id="about">
+				About: <%=about %>
+			</div>
+		</div>
+	</div>
+	<div id="Favorite">Favorites</div>	
 	<div id="resultscontainer">
  		<div id="mapcontainer">
 		  <div id="map"></div>

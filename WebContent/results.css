@@ -177,6 +177,8 @@ a{
 	height: 0vh;
 	bottom: 14vh;
 	left: 16vw;
+	max-width: 12vw;
+	font-size: 1.8vh;
 }
 .params1{
 	position: relative;
@@ -187,7 +189,7 @@ a{
 .params2{
 	position: relative;
 	bottom: 23vh;
-	left: 43vw;
+	left: 41vw;
 	height: 0vh;
 }
 .params{

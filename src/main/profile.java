@@ -34,14 +34,7 @@ public class profile extends HttpServlet {
      */
     public profile() {
         super();
-		try {
-    		System.out.println("> Establishing database connection...");
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=" + SQL_USERNAME + "&password=" + SQL_PASSWORD + "&useSSL=false");
-		} catch (ClassNotFoundException | SQLException e) {
-			System.out.println("> FATAL ERROR: Failed to establish database connection.");
-			e.printStackTrace();
-		}
+		
     }
 
 	/**
@@ -162,6 +155,15 @@ public class profile extends HttpServlet {
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		
+		try {
+    		System.out.println("> Establishing database connection...");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=" + SQL_USERNAME + "&password=" + SQL_PASSWORD + "&useSSL=false");
+		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println("> FATAL ERROR: Failed to establish database connection.");
+			e.printStackTrace();
+		}
 		// commenting out for testing : 
 		// int userID = Integer.parseInt((String)  session.getAttribute("user"));
 		int userID = 1;

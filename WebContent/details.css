@@ -76,8 +76,8 @@
 
 #resultscontainer{
 	position: absolute;
-	top: 8.7vh;
-	left: 50vw;
+	top: 10vh;
+	left: 60vw;
 	height: 55vh;
 	width: 35vw;
 	border-width: .15vw;
