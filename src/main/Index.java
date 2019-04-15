@@ -37,29 +37,93 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession();
 		String nextPage = "/results.jsp";
 		Connection conn = null;
 	    Statement st = null;
 	    ResultSet rs = null;
 	    ResultSet rs2 = null;
-	    String outlets = (String) request.getParameter("outletsForm");
-	    String seats = (String) request.getParameter("seatsForm");
-	    String lights = (String) request.getParameter("lightsForm");
-	    String noise = (String) request.getParameter("noiseForm");
-	    String inOrOut = (String) request.getParameter("inOrOutForm");
-	    String cafe = (String) request.getParameter("cafeForm");
-	    String hoursOpen = (String) request.getParameter("hoursOpenForm");
-	    String hoursClose = (String) request.getParameter("hoursCloseForm");
+	    
+		// TO-DO: ERROR HANDLING ! 
+		// print statements for debugging purposes :)  just to check that we're getting sent the right data
+		
+		String submitField = request.getParameter("submitField");
+		System.out.println("submit field: " + submitField);
+		
+		String latitude = request.getParameter("latitude");
+		System.out.println("latitude: " + latitude);
+
+		String longitude = request.getParameter("longitude");
+		System.out.println("longitude: " + longitude);
+
+		String photoURL = request.getParameter("photoURL");
+		System.out.println("photoURL: " + photoURL);
+
+		String address = request.getParameter("address");
+		System.out.println("address: " + address);
+
+		String buildingCode = request.getParameter("buildingCode");
+		System.out.println("building code: " + buildingCode);
+
+		String outlets = request.getParameter("outletsForm");
+		System.out.println("outlet availability: " + outlets);
+
+		String seats = request.getParameter("seatsForm");
+		System.out.println("seating types: " + seats);
+
+		String lights = request.getParameter("lightsForm");
+		System.out.println("lighting types: " + lights);
+
+		String noise = request.getParameter("noiseForm");
+		System.out.println("noise level: " + noise);
+
+		String inOrOut = request.getParameter("inOrOutForm");
+		System.out.println("indoor outdoor: " + inOrOut);
+
+		String cafe = request.getParameter("cafeForm");
+		System.out.println("cafe: " + cafe);
+
+		String hoursOpen = request.getParameter("hourOpenForm");
+		System.out.println("hour open: " + hoursOpen);
+
+		String hoursClose = request.getParameter("hourCloseForm");
+		System.out.println("hour close: " + hoursClose);
+
+		String phoneNumber = request.getParameter("phoneNumber");
+		System.out.println("phone number: " + phoneNumber);
+		
+//	    String outlets = (String) request.getParameter("outletsForm");
+//	    String seats = (String) request.getParameter("seatsForm");
+//	    String lights = (String) request.getParameter("lightsForm");
+//	    String noise = (String) request.getParameter("noiseForm");
+//	    String inOrOut = (String) request.getParameter("inOrOutForm");
+//	    String cafe = (String) request.getParameter("cafeForm");
+//	    String hoursOpen = (String) request.getParameter("hoursOpenForm");
+//	    String hoursClose = (String) request.getParameter("hoursCloseForm");
 	    String outletsReq = (String) request.getParameter("outletsBoxForm");
+		System.out.println("outlets req: " + outletsReq);
+	   
 	    String seatsReq = (String) request.getParameter("seatsBoxForm");
+		System.out.println("seats req: " + seatsReq);
+
 	    String lightsReq = (String) request.getParameter("lightsBoxForm");
+		System.out.println("lights req: " + lightsReq);
+
 	    String noiseReq = (String) request.getParameter("noiseBoxForm");
+		System.out.println("noise req: " + noiseReq);
+
 	    String inOrOutReq = (String) request.getParameter("inOrOutBoxForm");
+		System.out.println("in or out req: " + inOrOutReq);
+
 	    String cafeReq = (String) request.getParameter("cafeBoxForm");
+		System.out.println("cafe req: " + cafeReq);
+
 	    String hoursOpenReq = (String) request.getParameter("hoursOpenBoxForm");
+		System.out.println("hours open req: " + hoursOpenReq);
+
 	    String hoursCloseReq = (String) request.getParameter("hoursCloseBoxForm");
+		System.out.println("hours close req: " + hoursCloseReq);
+
 	    Vector<StudySpace> studySpaces = new Vector<>();
 	    // Following vectors' indices correspond to id of study space in database
 	    // For each study space, determine if study space matches all parameters that the user submitted
@@ -70,11 +134,10 @@ public class Index extends HttpServlet {
 	    Vector<Integer> numbMatches = new Vector<>();
 	    try {
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	System.out.println("HIIII2");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sctudy?user=root&password=root"); 
-	    	st = conn.createStatement();
-	    	rs = st.executeQuery("SELECT * from studyspaces");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=bigOfor201");
 	    	
+	    	st = conn.createStatement();
+	    	rs = st.executeQuery("SELECT * from studySpaces");
 	    	while(rs.next()) {
 	    		// changes to true if desired parameter is required but study space does not have parameter
 	    		Boolean dontAdd = false;
@@ -84,9 +147,9 @@ public class Index extends HttpServlet {
 	    		int numbOfParams = 0;
 	            
 	    		// if user did not select parameter then ignore
-	            if (!seats.equals("Choose...")) {
+	            if (!seats.contains("Choose")) {
 	            	// if user selected parameter does not match the study space's parameter, allParams is false
-		            if(!rs.getObject(6).equals(seats)) {
+		            if(!rs.getString("seatingTypes").contains(seats)) {
 		            	allParams = false;
 		            	// if they dont match and it is a required parameter, then do not add study spot to vector
 		            	if(seatsReq.equals("true")) {
@@ -96,8 +159,8 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!lights.equals("Choose...")) {
-		            if(!rs.getObject(7).equals(lights)) {
+	            if (!lights.contains("Choose")) {
+		            if(!rs.getString("lightSource").contains(lights)) {
 		            	allParams = false;
 		            	if(lightsReq.equals("true")) {
 		            		dontAdd = true;
@@ -106,9 +169,8 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!noise.equals("Choose...")) {
-
-		            if(!rs.getObject(8).equals(noise)) {
+	            if (!noise.contains("Choose")) {
+		            if(rs.getInt("noiseLevel") != Integer.parseInt(noise)) {
 		            	allParams = false;
 		            	if(noiseReq.equals("true")) {
 		            		dontAdd = true;
@@ -117,9 +179,8 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!cafe.equals("Choose...")) {
-
-		            if(!rs.getObject(9).equals(cafe)) {
+	            if (!cafe.contains("Choose")) {
+		            if(cafe.contains("Yes") && !rs.getBoolean("cafeAvailability")) {
 		            	allParams = false;
 		            	if(cafeReq.equals("true")) {
 		            		dontAdd = true;
@@ -128,9 +189,9 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!hoursOpen.equals("Choose...")) {
-
-		            if(!rs.getObject(10).equals(hoursOpen)) {
+	            // FIX TO FIND RANGE
+	            if (!hoursOpen.contains("Choose")) {
+		            if(!rs.getObject("hourOpen").equals(hoursOpen)) {
 		            	allParams = false;
 		            	if(hoursOpenReq.equals("true")) {
 		            		dontAdd = true;
@@ -139,9 +200,11 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!hoursClose.equals("Choose...")) {
+	            
+	            // FIX TO FIND RANGE
+	            if (hoursClose.contains("Choose")) {
 
-		            if(!rs.getObject(11).equals(hoursClose)) {
+		            if(!rs.getObject("hourClose").equals(hoursClose)) {
 		            	allParams = false;
 		            	if(hoursCloseReq.equals("true")) {
 		            		dontAdd = true;
@@ -150,9 +213,9 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!inOrOut.equals("Choose...")) {
+	            if (!inOrOut.contains("Choose")) {
 
-		            if(!rs.getObject(12).equals(inOrOut)) {
+		            if(!rs.getBoolean("indoorOutdoor") && inOrOut.contains("Oudoor")) {
 		            	allParams = false;
 		            	if(inOrOutReq.equals("true")) {
 		            		dontAdd = true;
@@ -161,9 +224,9 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!outlets.equals("Choose...")) {
+	            if (!outlets.contains("Choose")) {
 
-		            if(!rs.getObject(13).equals(outlets)) {
+		            if(!rs.getString("outletAvailability").contains(outlets)) {
 		            	allParams = false;
 		            	if(outletsReq.equals("true")) {
 		            		dontAdd = true;
@@ -220,21 +283,29 @@ public class Index extends HttpServlet {
 	    	while(rs2.next()) {
 	    		
 	    		if(studySpaceIds.contains(rs2.getObject(1))) {
-	    		StudySpace ss = new StudySpace((String)rs2.getObject(2),(double)rs2.getObject(5), (double)rs2.getObject(4),(String)rs2.getObject(3),
-	    				(String)rs2.getObject(13),(String)rs2.getObject(6),(String)rs2.getObject(7), (int)rs2.getObject(8),(Boolean)rs2.getObject(12),(Boolean)rs2.getObject(9), 
-	    				(String)rs2.getObject(10), (String)rs2.getObject(11),"not in database", "not in database", "not in database", (double)rs2.getObject(14), (int)rs2.getObject(1));
+	    		StudySpace ss = new StudySpace((String)rs2.getObject("sName"),(double)rs2.getObject("longitude"), (double)rs2.getObject("latitude"),(String)rs2.getObject("photoURL"),
+	    				(String)rs2.getObject("outletAvailability"),(String)rs2.getObject("seatingTypes"),(String)rs2.getObject("lightSource"), (int)rs2.getObject("noiseLevel"),(Boolean)rs2.getObject("indoorOutdoor"),(Boolean)rs2.getObject("cafeAvailability"), 
+	    				(String)rs2.getObject("hourOpen"), (String)rs2.getObject("hourClose"),(String)rs2.getString("phoneNumber"), (String)rs2.getString("address"), (String) rs2.getString("buildingCode"), (double)rs2.getObject("rating"), (int)rs2.getObject("locationID"));
 	    			studySpaces.add(ss);
 	    		}
 	    		
 	    	}
+	    	//TEST TO CHECK STUDY SPACES
+	    	for (int i = 0; i < studySpaces.size(); i++) {
+	    		System.out.println(i + ": " + studySpaces.get(i).getName());
+	    	}
 	    	
 	    	// set session variable to studySpaces vector
 	    	session.setAttribute("studySpaces", studySpaces);
-	    	System.out.println(studySpaces.size());
+	    	
 	    } catch (SQLException sqle) {
 	    	System.out.println (sqle.getMessage());
+    		sqle.printStackTrace();
+
 	    } catch (ClassNotFoundException cnfe) {
-	    	System.out.println (cnfe.getMessage()) ;
+	    	System.out.println (cnfe.getMessage());
+    		cnfe.printStackTrace();
+
 	    } finally {
 	    	try {
 	    		if (rs != null) {
@@ -248,6 +319,7 @@ public class Index extends HttpServlet {
 	    		}
 	    	} catch (SQLException sqle) {
 	    		System.out.println(sqle.getMessage());
+	    		sqle.printStackTrace();
 	    	}
 	    }
 	    RequestDispatcher dispatch = getServletContext().getRequestDispatcher(nextPage);
