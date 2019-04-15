@@ -41,6 +41,9 @@ public class register extends HttpServlet {
 		System.out.println("in register.java");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String about = request.getParameter("about");
+		if(about == null)
+			about = "";
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -59,9 +62,10 @@ public class register extends HttpServlet {
 			else {
 				//okay username and password
 				System.out.println("try to insert into database");
-				ps = conn.prepareStatement("INSERT INTO sctudy.users (username, uPassword) VALUES (?, ?)");
+				ps = conn.prepareStatement("INSERT INTO sctudy.users (username, uPassword, about) VALUES (?, ?, ?)");
 				ps.setString(1, username);
 				ps.setString(2,  password);
+				ps.setString(3, about);
 				ps.execute();
 				//get user number
 				ps = conn.prepareStatement("SELECT userID FROM sctudy.users WHERE username=?");
@@ -75,6 +79,7 @@ public class register extends HttpServlet {
 		        session.setAttribute("user", userNum); 
 		        session.setAttribute("username", username);
 		        session.setAttribute("loggedIn", true);
+		        session.setAttribute("about", about);
 		        
 		        response.getWriter().write("1");
 		        RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/index.jsp");

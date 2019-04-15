@@ -58,12 +58,13 @@ public class login extends HttpServlet {
 			else {
 				//correct username and password, get user number
 				Integer userNum = rs.getInt("userID");
+				String about = rs.getString("about");
 				
 				HttpSession session=request.getSession();
 		        session.setAttribute("user", userNum); 
 		        session.setAttribute("username", username);
 		        session.setAttribute("loggedIn", true);
-		        
+		        session.setAttribute("about", about);
 		        response.getWriter().write("1");
 
 			}

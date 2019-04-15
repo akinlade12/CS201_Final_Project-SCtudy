@@ -16,6 +16,7 @@
 					username: document.getElementById("username").value,
 					password: document.getElementById("password").value,
 					recPassword: document.getElementById("recPassword").value
+					about: document.getElementById("about").value
 				},
 				success: function(result) {
 					if(result == "0"){
@@ -41,7 +42,7 @@
 	</head>
 	<body background="background.jpg">
 		<div class="logo"><a id="logo" href="index.jsp" style="text-decoration: none; color: black; display: inline-block; font-family: Courier">SCtudy</a></div>
-		<div class="form">
+		<div class="form" id="container">
 			<form action="register" method="GET">
 				<div class="username">
 					Username<br/><input class="userinput" id="username" type="text" name="username">
@@ -54,8 +55,11 @@
 					<br/>
 					<strong><div id="errorMessage"></div></strong>
 				</div>
+				<div class="description">
+					About<br/><textarea id="about" name="about" /></textarea>
+				</div>
 				<br/>
-				<button class="register" type="button" name="register" onclick="validate2()">Register</button>
+				<button class="register" type="button" name="register" onclick="validate2()" id="button">Register</button>
 			</form>
 		</div>
 	</body>

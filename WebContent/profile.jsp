@@ -22,7 +22,9 @@
 	if (session.getAttribute("loggedIn") != null) {
 		username = (String) session.getAttribute("username");
 	}
-	String about = "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ";
+	String about = (String) session.getAttribute("about");
+	if(about == null)
+		about = "";
 %>
 <html>
 <head>
