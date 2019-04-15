@@ -18,15 +18,20 @@
 					Sctudy
 				</a>
 			</div>
-			<div id = "login" style = "float: right">
-				<a href="login.jsp" id = "login" style = "color: black; float: right; margin-right: 1%; margin-top: 1%;">
-					Login
-				</a>
+			<div id="out">
+				<div id = "login" style = "float: right">
+					<a href="login.jsp" id = "login" style = "color: black; float: right; margin-right: 1%; margin-top: 1%;">
+						Login
+					</a>
+				</div>
+				<div id = "register" style = " margin-right: 10px;  float: right">
+					<a href="register.jsp" id = "register" style = "color: black; margin-right: 1%;  margin-top: 1%; float: right;">
+						Register
+					</a>
+				</div>
 			</div>
-			<div id = "register" style = " margin-right: 10px;  float: right">
-				<a href="register.jsp" id = "register" style = "color: black; margin-right: 1%;  margin-top: 1%; float: right;">
-					Register
-				</a>
+			<div id="in">
+				
 			</div>
 		</div>
 		<div id = "search-div">
