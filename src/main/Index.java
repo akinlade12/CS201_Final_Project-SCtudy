@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import main.StudySpace;
+import com.mysql.cj.conf.ConnectionUrlParser.Pair;
 
 /**
  * Servlet implementation class Index
@@ -36,6 +36,12 @@ public class Index extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    public void swap(Vector<Pair> p, int first, int second) {
+    	Pair temp = p.get(first);
+    	p.set(first, p.get(second));
+    	p.set(second, temp);
+    	
+    }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String nextPage = "/results.jsp";
@@ -138,9 +144,10 @@ public class Index extends HttpServlet {
 	    Vector<Boolean> dontAddV = new Vector<>();
 	    // For each study space, determine the number of parameters match with the user's search
 	    Vector<Integer> numbMatches = new Vector<>();
+	    Vector<Pair> numbMatchPair = new Vector<>();
 	    try {
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=Toyosi12");
 	    	
 	    	st = conn.createStatement();
 	    	rs = st.executeQuery("SELECT * from studyspaces");
@@ -164,6 +171,9 @@ public class Index extends HttpServlet {
 		            } else {
 		            	numbOfParams++;
 		            }
+	            }
+	            if(rs.getString("sName").contains(submitField)) {
+	            	numbOfParams = 10;
 	            }
 	            if (!lights.contains("Choose")) {
 		            if(!rs.getString("lightSource").contains(lights)) {
@@ -249,60 +259,51 @@ public class Index extends HttpServlet {
 		            }
 	            }
 	            
+	            Pair p = new Pair(rs.getString("locationID"),numbOfParams);
+	            numbMatchPair.add(p);
 	            numbMatches.add(numbOfParams);
 	            allParamsV.add(allParams);
 	            dontAddV.add(dontAdd);
 	    	}
-	    	
-	    	Boolean completeMatch = false;
-	    	// vector of studySpaceId's that will be submitted to results page
-	    	Vector<Integer> studySpaceIds = new Vector<>();
-	    	// first loop through allParamsV to determine if there are any study spaces that completely match with user's search
-	    	for(int i = 0; i < allParamsV.size(); i++) {
-	    		if(allParamsV.get(i)) {
-	    			studySpaceIds.add(i + 1);
-	    			// if there is a complete match, we will not loop through to determine the study space with the highest number of matches
-	    			completeMatch = true;
-	    		}
-	    	}
-	    	// variable used to get all study spaces with highest number of matched parameters
-	    	int maxMatches = 0;
-	    	// if there is not a study space with a complete match, loop through numbMatches vector to find study spaces with highest number of matches
-	    	if(!completeMatch) {
-	    		for(int i = 0; i < dontAddV.size(); i++) {
-	    			// if the user's required parameter does not match with the study space, we will not add it to the study space vector 
-	    			if(!dontAddV.get(i)) {
-	    				if(numbMatches.get(i) > maxMatches) {
-	    					maxMatches = numbMatches.get(i);
-	    				}
-	    			}
-	    			else {
-	    				
-	    			}
-	    		}
-	    		// loop through again to add all study spaces with maxMatches
-	    		for(int i = 0; i < dontAddV.size(); i++) {
-	    			if(!dontAddV.get(i))
-	    			if(maxMatches == numbMatches.get(i)) {
-	    				//StudySpace ss = new StudySpace();
-		    			studySpaceIds.add(i + 1);
-	    			}
+	    	int k, j, min_idx; 
+	    	int n = numbMatchPair.size();
+	        // One by one move boundary of unsorted subarray 
+	        for (k = 0; k < n-1; k++) 
+	        { 
+	            // Find the minimum element in unsorted array 
+	            min_idx = k; 
+	            for (j = k+1; j < n; j++) 
+	              if ((int)numbMatchPair.get(j).right < (int)numbMatchPair.get(min_idx).right) 
+	                min_idx = j; 
+	      
+	            // Swap the found minimum element with the first element 
+	            swap(numbMatchPair, min_idx, k);
+	        } 
+	        
+	    	Vector<String> studySpaceIds = new Vector<>();
+	    	for (int i = numbMatchPair.size() - 1; i >= 0; i--) {
+	    		if(!dontAddV.get(Integer.parseInt((String) numbMatchPair.get(i).left) - 1)) {
+	    			studySpaceIds.add((String)numbMatchPair.get(i).left);
+	    	    	System.out.println("numb " + (String)numbMatchPair.get(i).left);
+
 	    		}
 	    	}
 	    	
-	    	rs2 = st.executeQuery("SELECT * from studySpaces");
+	    	
 	    	
 	    	// loop through database again and create StudySpace objects for each id in studySpaceIds vector
-	    	while(rs2.next()) {
+	    	for (int i = 0; i < studySpaceIds.size(); i++) {
 	    		
-	    		if(studySpaceIds.contains(rs2.getObject(1))) {
+	    		rs2 = st.executeQuery("SELECT * from studySpaces WHERE locationID = '" + Integer.parseInt(studySpaceIds.get(i)) + "'");
+	    		rs2.next();
+	    		
 	    		StudySpace ss = new StudySpace((String)rs2.getObject("sName"),(double)rs2.getObject("longitude"), (double)rs2.getObject("latitude"),(String)rs2.getObject("photoURL"),
 	    				(String)rs2.getObject("outletAvailability"),(String)rs2.getObject("seatingTypes"),(String)rs2.getObject("lightSource"), (int)rs2.getObject("noiseLevel"),(Boolean)rs2.getObject("indoorOutdoor"),(Boolean)rs2.getObject("cafeAvailability"), 
 	    				(String)rs2.getObject("hourOpen"), (String)rs2.getObject("hourClose"),(String)rs2.getString("phoneNumber"), (String)rs2.getString("address"), (String) rs2.getString("buildingCode"), (double)rs2.getObject("rating"), (int)rs2.getObject("locationID"));
 	    			studySpaces.add(ss);
-	    		}
-	    		
+	    			
 	    	}
+	    	
 	    	//TEST TO CHECK STUDY SPACES
 	    	for (int i = 0; i < studySpaces.size(); i++) {
 	    		System.out.println(i + ": " + studySpaces.get(i).getName());
