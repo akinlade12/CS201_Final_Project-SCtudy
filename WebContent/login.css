@@ -1,14 +1,14 @@
 .form{
-	margin-left: 40%;
-	margin-top: 10%;
+	margin-left: 35%;
+	margin-top: 15%;
 	padding-left: 1%;
 	padding-top: 1%;
 	padding-bottom: 1%;
 	position: absolute;
 	z-index: 3;
 	float:left;
-	height: 25%;
-	width: 15%;
+	height: 350px;
+	width: 600px;
 	border-radius: 15px;
 	background-color: rgb(140, 140, 140, .6);
 	color: white;
@@ -17,4 +17,41 @@
 	margin-left: 1%;
 	margin-top: 1%;
 	font-size: 30px;
+}
+.username{
+	float:left;
+	margin-left: 15%;
+	margin-top: 5%;
+	font-size: 20px;
+}
+
+.userinput{
+	height: 40px;
+	width: 400px;
+	margin-top: 1%;
+	border-radius: 15px;
+}
+
+.password{
+	float:left;
+	margin-top: 30px;
+	margin-left: 15%;
+	font-size: 20px;
+}
+
+.passinput{
+	height: 40px;
+	width: 400px;
+	margin-top: 1%;
+	border-radius: 15px;
+}
+.login{
+	margin-top: 37%;
+	font-size: 30px;
+	margin-left: 40%;
+	width: 17%;
+	height: 5%;
+	background-color: white;
+	border-radius: 15px;
+	padding: 1%;
 }

@@ -51,8 +51,8 @@
 					<strong><div id="errorMessage"></div></strong>
 				</div>
 				<br/>
-				<div>
-					<button class="login" type="button" name="login" onclick="validate2()">Login</button>
+				<div class="login">
+					<button type="button" name="login" onclick="validate2()">Login</button>
 				</div>
 			</form>
 		</div>

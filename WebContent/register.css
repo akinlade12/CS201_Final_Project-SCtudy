@@ -1,6 +1,6 @@
 .form{
 	margin-left: 35%;
-	margin-top: 5%;
+	margin-top: 10%;
 	padding-left: 1%;
 	padding-top: 1%;
 	padding-bottom: 1%;
@@ -18,11 +18,61 @@
 	margin-top: 1%;
 	font-size: 30px;
 }
+.username{
+	float:left;
+	margin-left: 15%;
+	margin-top: 5%;
+	font-size: 20px;
+}
+
+.userinput{
+	height: 40px;
+	width: 400px;
+	margin-top: 1%;
+	border-radius: 15px;
+}
+
+.password{
+	float:left;
+	margin-top: 1%;
+	margin-left: 15%;
+	font-size: 20px;
+}
+
+.passinput{
+	height: 40px;
+	width: 400px;
+	margin-top: 1%;
+	border-radius: 15px;
+}
+.passCheck{
+	height: 40px;
+	width: 400px;
+	margin-top: 1%;
+	border-radius: 15px;
+	font-size: 20px;
+}
+.register{
+	font-size: 30px;
+	margin-left: 10%;
+	width: 30%;
+	height: 10%;
+	background-color: white;
+	border-radius: 15px;
+	padding: 1%;
+}
+.description{
+	margin-top: 48%;
+	margin-left: 16%;
+	font-size: 20px;
+}
 #about{
-	width: 20vw;
+	width: 400px;
 	height: 20vh;
 	padding: 2px 2px;
 	resize: none;
+	margin-top: 1%;
+	border-radius: 15px;
 }
 #container{
 	display: flex;
