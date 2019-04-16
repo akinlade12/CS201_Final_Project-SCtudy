@@ -124,6 +124,7 @@ tr{
 	display: block;
 	border-collapse: collapse;
 	background-color: #F0F0F0;
+	max-height: 25.9vh;
 }
 td{
 	height: 25.9vh;
@@ -152,13 +153,20 @@ table{
 	border-style: solid;
 	border-radius: 1.5vh;
 }
+#title{
+}
 .title{
+	display: inline-block;
 	text-decoration: none;
 	font-weight: bold;
 	font-size: 3.5vh;
 	position: relative;
 	left: 16vw;
 	bottom: 19vh;
+	max-width: 11vw;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 a{
 	color: #4BA5FF;
@@ -213,8 +221,42 @@ img {
 }
 #circlecontainer{
   position: relative;
-  left: 56.5vw;
+  left: 55.5vw;
   bottom: 24vh;
   height: 0vh;
   width: 0vw;
+}
+#logo{
+	color: black;
+	float: left; 
+	font-family: Courier; 
+	font-size: 30px;
+	text-decoration: none;
+}
+#out{
+	position: absolute;
+	right: 3vw;
+	top: 1vh;
+	width:8vw;
+	height: 3vh;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+#in{
+	position: absolute;
+	right: 3vw;
+	top: 1vh;
+	width:8vw;
+	height: 3vh;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.upper{
+	text-decoration: none;
+	font-size: 2.5vh;
+}
+#login, #register{
+	color: black;
 }

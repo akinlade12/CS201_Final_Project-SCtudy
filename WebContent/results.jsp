@@ -1,23 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import = "java.util.Vector" %>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "main.StudySpace" %>
 <!DOCTYPE html>
 <%
-	//StudySpace space1 = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
-		//	true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65, 6);
+	Boolean logged = (Boolean) session.getAttribute("loggedIn");
+	StudySpace space1 = new StudySpace("Space 1", 0, 0, "bovard.jpg", "Sparse", "Couch", "LED", 2,
+		true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65, 6);
 	//ArrayList<StudySpace> spaces = new ArrayList<StudySpace>();
 	//spaces.add(space1);
-	ArrayList<StudySpace> spaces = (ArrayList<StudySpace>) session.getAttribute("studySpaces");  
+	Vector<StudySpace> spaces = (Vector<StudySpace>) session.getAttribute("studySpaces");  
 	int size;
 	if(spaces == null || spaces.size() == 0){
 		size = 0;
+		Vector<StudySpace> spaces2 = new Vector<StudySpace>(); //just to deal with nullpointerexceptions
+		spaces2.add(space1);
+		spaces = spaces2;
 	}
 	else{
 		size = spaces.size();
 	}
-	if(spaces == null)
-		System.out.println("NULL");
+	ArrayList<Double> latArray = new ArrayList<Double>();
+	ArrayList<Double> longArray = new ArrayList<Double>();
+	ArrayList<String> refArray = new ArrayList<String>();
+	for(int i = 0; i < size; i++) {
+		latArray.add(spaces.get(i).getLatitude());
+		longArray.add(spaces.get(i).getLongitude());
+		refArray.add(spaces.get(i).getName());
+	}
 %>
 <html>
 <head>
@@ -26,6 +37,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3d8Oblehwi3ISiykxRtGtqD0btZkWjIs"></script>
 	<script>
+		var size = Number(<%=size%>);
 		function initialize() {
 			var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			var labelIndex = 0;
@@ -36,68 +48,72 @@
 			var map = new google.maps.Map(document.getElementById('map'), mapOptions); //make map
 			var markerArray = [];
 			var infoArray = [];
-			var size = <%=size %>;
-			var i;
-			<% int k = 0; %>
-			for(i = 0; i < size; i++) { //will change based on search results
-				<% System.out.println(k); %>
-				var latitude = <%= spaces.get(k).getLatitude()%>;
-				var longitude = <%= spaces.get(k).getLongitude()%>;
-				var pos = {lat: latitude, lng: longitude};
-				<% String refs = spaces.get(k).getName(); %>
-				var t = '<%= refs%>';
-				var marker = new google.maps.Marker({
-					position: pos,
-					map: map,
-					title: t,
-					label: labels[labelIndex++ % labels.length],
-				});
-				markerArray.push(marker);
-				var contentString = '<a href="DetailsServlet?index=' + <%= k%> + '">' + t + '</a>';
-				var infowindow = new google.maps.InfoWindow({
-					content: contentString
-				});
-				
-				infoArray.push(infowindow);
-				
-				<% k++; %>
-			}
-			if (navigator.geolocation) { //puts marker at current position
-	          navigator.geolocation.getCurrentPosition(function(position) {
-	            var pos = {
-	              lat: position.coords.latitude,
-	              lng: position.coords.longitude
-	            };
+			var j;
+			if(size > 0) {
+				var latArray = [<% for (int i = 0; i < latArray.size(); i++) { %><%= latArray.get(i) %> <%= i + 1 < latArray.size() ? ",":"" %><% } %>];
+				var longArray = [<% for (int i = 0; i < longArray.size(); i++) { %><%= longArray.get(i) %><%= i + 1 < longArray.size() ? ",":"" %><% } %>];
+				var refArray = [<% for (int i = 0; i < refArray.size(); i++) { %>"<%= refArray.get(i) %>"<%= i + 1 < refArray.size() ? ",":"" %><% } %>];
+				var i;
+				for(i = 0; i < size; i++) { 
+					var latitude = latArray[i];
+					var longitude = longArray[i];
+					var pos = {lat: latitude, lng: longitude};	
+					var t = refArray[i];
+					var marker = new google.maps.Marker({
+						position: pos,
+						map: map,
+						title: t,
+						label: labels[labelIndex++ % labels.length],
+					});
+					markerArray.push(marker);
+					var contentString = '<a href="DetailsServlet?index=' + i + '">' + t + '</a>';
+					var infowindow = new google.maps.InfoWindow({
+						content: contentString
+					});
+					
+					infoArray.push(infowindow);
+			
+				}
+				if (navigator.geolocation) { //puts marker at current position
+		          navigator.geolocation.getCurrentPosition(function(position) {
+		            var pos = {
+		             // lat: position.coords.latitude,
+		              //lng: position.coords.longitude
+		              lat: 34.021550,
+		              lng: -118.283847
+		            };
 
-	            var marker = new google.maps.Marker({
-					position: pos,
-					map: map,
-					title: "Your Location",
-					icon: {
-						url: 'http://maps.google.com/mapfiles/ms/icons/arrow.png'
-					}
-				});
-	          }, function() {
-	            handleLocationError(true, infoWindow, map.getCenter());
-	          });
-	        } else {
-	          // Browser doesn't support Geolocation
-	          handleLocationError(false, infoWindow, map.getCenter());
-	        }
-		 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-		        
-		      }
-				 
-			function makeListener(index) {
-			    return function() {
-			        infoArray[index].disableAutoPan=true;
-			        infoArray[index].open(map,markerArray[index]);
+		            var marker = new google.maps.Marker({
+						position: pos,
+						map: map,
+						title: "Your Location",
+						icon: {
+							url: 'http://maps.google.com/mapfiles/ms/icons/arrow.png'
+						}
+					});
+		          }, function() {
+		            handleLocationError(true, infoWindow, map.getCenter());
+		          });
+		        } else {
+		          // Browser doesn't support Geolocation
+		          handleLocationError(false, infoWindow, map.getCenter());
+		        }
+			 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+			        
 			    }
+					 
+				function makeListener(index) {
+				    return function() {
+				        infoArray[index].disableAutoPan=true;
+				        infoArray[index].open(map,markerArray[index]);
+				    }
+				}
+				
+				for (var u=0; u<size; u++){ 
+				    google.maps.event.addListener(markerArray[u], 'click', makeListener(u));
+				}
 			}
 			
-			for (var u=0; u<size; u++){ 
-			    google.maps.event.addListener(markerArray[u], 'click', makeListener(u));
-			}
 			document.getElementById("mapcontainer").style.background = 'flex';
 		}
 	</script>
@@ -107,16 +123,49 @@
 </head>
 <body background="background.jpg">
 	<div id = "header">
-		<a href="login.jsp" id = "logo">
-			Sctudy
-		</a>
-		<a href="login.jsp" id = "login">
-			Login
-		</a>
-		<a href="register.jsp" id = "register">
-			Register
-		</a>
-	</div>
+			<a href="index.jsp" id = "logo">
+				Sctudy
+			</a>
+			<div id="out">
+				<div class ="upper" id = "login">
+					<a href="login.jsp" id = "login" >
+						Login
+					</a>
+				</div>
+				<div class ="upper"id = "register">
+					<a href="register.jsp" id = "register" >
+						Register
+					</a>
+				</div>
+			</div>
+			<div id="in">
+				<div class ="upper" id = "profile">
+					<a href="profile.jsp" id = "login" >
+						Profile
+					</a>
+				</div>
+				<div class ="upper" id = "logout">
+					<a href="login?loggedout=true" id = "register">
+						Log Out
+					</a>
+				</div>
+			</div>
+			<script>
+				var logged = <%= logged%>;
+				if(logged == null) {
+					$("#in").hide();
+					$("#out").show();
+				}	
+				else if(logged) {
+					$("#out").hide();
+					$("#in").show();
+				}
+				else if(!logged) {
+					$("#in").hide();
+					$("#out").show();
+				}
+			</script>
+		</div>
 	<div id="Result">
 	</div>
 	<div id="toggle">
@@ -349,9 +398,9 @@
 								
 							</div>
 							<div class="address">
-								<p><%=space.getPhone() %> </p>
-								<p><%=space.getAddress() %></p>
-								<p><%=space.getBuilding() %> </p>
+								<div><%=space.getPhone() %> </div>
+								<div><%=space.getAddress() %></div>
+								<div><%=space.getBuilding() %> </div>
 							</div>
 							<div class="params1">
 								<p class="params"> Hour Open: <%=space.getHourOpen() %> </p>
