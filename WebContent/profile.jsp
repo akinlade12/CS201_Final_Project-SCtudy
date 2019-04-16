@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<% Boolean logged = (Boolean) session.getAttribute("loggedIn");%>
 <%
 /* 	StudySpace space1 = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
 			true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65, 5); */
@@ -33,19 +34,53 @@
 	<link rel="stylesheet" type="text/css" href="profile.css" />
 <meta charset="UTF-8">
 <title><%=username %>'s Profile</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body background="background.jpg">
 	<div id = "header">
-		<a href="login.jsp" id = "logo">
-			Sctudy
-		</a>
-		<a href="profile" id = "login">
-			Profile
-		</a>
-		<a href="register.jsp" id = "register">
-			Register
-		</a>
-	</div>
+			<a href="index.jsp" id = "logo">
+				Sctudy
+			</a>
+			<div id="out">
+				<div class ="upper" id = "login">
+					<a href="login.jsp" id = "login" >
+						Login
+					</a>
+				</div>
+				<div class ="upper"id = "register">
+					<a href="register.jsp" id = "register" >
+						Register
+					</a>
+				</div>
+			</div>
+			<div id="in">
+				<div class ="upper" id = "profile">
+					<a href="profile.jsp" id = "login" >
+						Profile
+					</a>
+				</div>
+				<div class ="upper" id = "logout">
+					<a href="login?loggedout=true" id = "register">
+						Log Out
+					</a>
+				</div>
+			</div>
+			<script>
+				var logged = <%= logged%>;
+				if(logged == null) {
+					$("#in").hide();
+					$("#out").show();
+				}	
+				else if(logged) {
+					$("#out").hide();
+					$("#in").show();
+				}
+				else if(!logged) {
+					$("#in").hide();
+					$("#out").show();
+				}
+			</script>
+		</div>
 	<div id="prof">Profile Summary</div>
 	<div id="sidebar">
 		<div id="piccontainer">

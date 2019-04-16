@@ -64,7 +64,7 @@ public class submit extends HttpServlet {
 		
 		String query = "insert into studySpaces (sName, photoURL, latitude, longitude,"
 				+ "seatingTypes, lightSource, noiseLevel, cafeAvailability, hourOpen,"
-				+ "hourClose, indoorOutdoor, outletAvailability, phoneNumber, address, buildingCode) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "hourClose, indoorOutdoor, outletAvailability, phoneNumber, address, buildingCode, rating, numRatings) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			st = conn.prepareStatement(query);
@@ -84,7 +84,8 @@ public class submit extends HttpServlet {
 			st.setString(13, map.get("phoneNumber"));
 			st.setString(14, map.get("address"));
 			st.setString(15, map.get("buildingCode"));
-			
+			st.setInt(16, 0);
+			st.setInt(17, 0);
 			st.execute();
 		}
 		catch (SQLException e) {
@@ -160,7 +161,7 @@ public class submit extends HttpServlet {
 		dataMap.put("latitude", latitude);
 		dataMap.put("longitude", longitude);
 		dataMap.put("photoURL", photoURL);
-		dataMap.put("addreess", address);
+		dataMap.put("address", address);
 		dataMap.put("buildingCode", buildingCode);
 		dataMap.put("outletAvailability", outletAvailability);
 		dataMap.put("seatingTypes", seatingTypes);
@@ -191,7 +192,7 @@ public class submit extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("index1.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 		rd.forward(request, response);
 		return;
 	}

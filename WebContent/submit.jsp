@@ -1,43 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<% Boolean logged = (Boolean) session.getAttribute("loggedIn");%>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Submit</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="submit.css" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 <body background="background.jpg">
 	<div id = "header">
-		<a href="login.jsp" id = "logo" style = "color: black; float: left; font-family: Courier; font-size: 30px;">
-			SCtudy
-		</a>
-		<a href="login.jsp" id = "login" style = "color: black; float: right; margin-right: 1%; margin-top: 1%;">
-			Login
-		</a>
-		<a href="register.jsp" id = "register" style = "color: black; margin-right: 1%;  margin-top: 1%; float: right;">
-			Register
-		</a>
-	</div>
+			<a href="index.jsp" id = "logo">
+				Sctudy
+			</a>
+			<div id="out">
+				<div class ="upper" id = "login">
+					<a href="login.jsp" id = "login" >
+						Login
+					</a>
+				</div>
+				<div class ="upper"id = "register">
+					<a href="register.jsp" id = "register" >
+						Register
+					</a>
+				</div>
+			</div>
+			<div id="in">
+				<div class ="upper" id = "profile">
+					<a href="profile.jsp" id = "login" >
+						Profile
+					</a>
+				</div>
+				<div class ="upper" id = "logout">
+					<a href="login?loggedout=true" id = "register">
+						Log Out
+					</a>
+				</div>
+			</div>
+			<script>
+				var logged = <%= logged%>;
+				if(logged == null) {
+					$("#in").hide();
+					$("#out").show();
+				}	
+				else if(logged) {
+					$("#out").hide();
+					$("#in").show();
+				}
+				else if(!logged) {
+					$("#in").hide();
+					$("#out").show();
+				}
+			</script>
+		</div>
 	<div class="submit">
 			<div class = "submit-div">
 				<form class="submitForm" action="submit" method="POST">
-	  				 <input id="submitField" class="submitField" name="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit"><br><br>
-	  				 <input id="latitude" type="text" placeholder="Latitude" name="latitude">
-	  				 <input id="longitude" type="text" placeholder="Longitude" name="longitude"><br><br>
-	  				 <input id="photoURL" type="text" placeholder="Link to Photo" name="photoURL"><br><br>
-	  				 <input id="address" type="text" placeholder="Address" name="address"><br><br>
-	  				 <input id="buildingCode" type="text" placeholder="Building Code" name="buildingCode"><br><br>
-	  				 <input id="phoneNumber" type="text" placeholder="Phone Number" name="phoneNumber"><br><br>
-	  				 <input type="hidden" id="outletsForm" name="outletsForm" value="">
-	  				 <input type="hidden" id="seatsForm" name="seatsForm" value="">
-	  				 <input type="hidden" id="lightsForm" name="lightsForm" value="">
+	  				 <input id="submitField" class="submitField" name="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit" required><br><br>
+	  				 <input id="latitude" type="text" placeholder="Latitude" name="latitude" required>
+	  				 <input id="longitude" type="text" placeholder="Longitude" name="longitude" required><br><br>
+	  				 <input id="photoURL" type="text" placeholder="Link to Photo" name="photoURL" required><br><br>
+	  				 <input id="address" type="text" placeholder="Address" name="address" required><br><br>
+	  				 <input id="buildingCode" type="text" placeholder="Building Code" name="buildingCode" required><br><br>
+	  				 <input id="phoneNumber" type="text" placeholder="Phone Number" name="phoneNumber" required><br><br>
+	  				 <input type="hidden" id="outletsForm" name="outletsForm" value="" required>
+	  				 <input type="hidden" id="seatsForm" name="seatsForm" value="" required>
+	  				 <input type="hidden" id="lightsForm" name="lightsForm" value="" required>
 	  				 <input type="hidden" id="noiseForm" name="noiseForm" value="">
-	  				 <input type="hidden" id="inOrOutForm" name="inOrOutForm" value="">
-	  				 <input type="hidden" id="cafeForm" name="cafeForm" value="">
-	  				 <input type="hidden" id="hourOpenForm" name="hourOpenForm" value="">
-	  				 <input type="hidden" id="hourCloseForm" name="hourCloseForm" value="">
+	  				 <input type="hidden" id="inOrOutForm" name="inOrOutForm" value="" required>
+	  				 <input type="hidden" id="cafeForm" name="cafeForm" value="" required>
+	  				 <input type="hidden" id="hourOpenForm" name="hourOpenForm" value="" required>
+	  				 <input type="hidden" id="hourCloseForm" name="hourCloseForm" value="" required>
 	  				 
 	  				 
 	 				<button class="btn btn-danger" onclick="submitForm()" id="submitButton">Submit</button>

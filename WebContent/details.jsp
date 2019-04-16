@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="main.StudySpace" %>
+<% Boolean logged = (Boolean) session.getAttribute("loggedIn");%>
 <% 
 	StudySpace currentSearch = (StudySpace) session.getAttribute("currentStudySpot");
 	StudySpace space = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
@@ -161,16 +162,49 @@
 		  </div>
 		</div>
 		<!-- Persistent top bar -->
-		<div class="topBar">
-			<a class="logo" id="logo" href="index.jsp" style="text-decoration: none; color: black; display: inline-block; font-family: Courier">SCtudy</a>
-			<div class="barRight" style="display: inline-block;">
-				<a id="login" href="login.jsp" style="text-decoration: none; color: black; display: inline-block;">Login</a>
-				<a id="register" href="register.jsp" style="text-decoration: none; color: black; display: inline-block; padding-left: 10px;">Register</a>
-				<form action="profile" style="display:inline-block;"><button id="profile" type="submit" style="text-decoration: none; color: white; display: none; font-size:40px;">Profile</button></form>
-				<a id="signOut" href="javascript:signOut();" style="text-decoration: none; color: white; display: none;">Sign Out</a>
+		<div id = "header">
+			<a href="index.jsp" id = "logo">
+				Sctudy
+			</a>
+			<div id="out">
+				<div class ="upper" id = "login">
+					<a href="login.jsp" id = "login" >
+						Login
+					</a>
+				</div>
+				<div class ="upper"id = "register">
+					<a href="register.jsp" id = "register" >
+						Register
+					</a>
+				</div>
 			</div>
-		</div>
-		
+			<div id="in">
+				<div class ="upper" id = "profile">
+					<a href="profile.jsp" id = "login" >
+						Profile
+					</a>
+				</div>
+				<div class ="upper" id = "logout">
+					<a href="login?loggedout=true" id = "register">
+						Log Out
+					</a>
+				</div>
+			</div>
+			<script>
+				var logged = <%= logged%>;
+				if(logged == null) {
+					$("#in").hide();
+					$("#out").show();
+				}	
+				else if(logged) {
+					$("#out").hide();
+					$("#in").show();
+				}
+				else if(!logged) {
+					$("#in").hide();
+					$("#out").show();
+				}
+			</script>
 		<!-- Details -->
 		<div class="locationImage"><img src=<%= currentSearch.getPhotoURL() %> alt="Study Space Image"></div>
 		<div class="name">
