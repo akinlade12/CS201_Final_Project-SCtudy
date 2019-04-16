@@ -55,11 +55,12 @@ insert into studySpaces (sName, photoURL, latitude, longitude, seatingTypes, lig
 create table users(
 	userID int(11) primary key AUTO_INCREMENT,
 	username varchar(50),
-	uPassword varchar(50)
+	uPassword varchar(50),
+    about varchar(50)
 );
 
-insert into users (username, uPassword) 
-values ('jessica', 'jessica'), ('anna', 'anna'), ('ashwin', 'ashwin'), ('toyosi', 'toyosi');
+insert into users (username, uPassword, about) 
+values ('jessica', 'jessica', ''), ('anna', 'anna', 'blah blah'), ('ashwin', 'ashwin', 'blah blah blah'), ('toyosi', 'toyosi', 'blah blah');
 
 
 create table reviews(
