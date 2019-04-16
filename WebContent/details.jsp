@@ -103,7 +103,7 @@
 					center: pos,
 					zoom: 16
 			};
-			var map = new google.maps.Map(document.getElementById('map'), mapOptions); //make map
+			var map = new google.maps.Map(document.getElementById('map'), mapOptions);//make map
 			
 			var i;
 			<% String refs = currentSearch.getName(); %>
