@@ -5,7 +5,7 @@
 	font-size: 30px;
 }
 .barRight{
-	margin-left: 80%;
+	margin-left: 70%;
 }
 .topBar{
 	float: left;
@@ -15,76 +15,97 @@
 	margin-bottom: 3%;
 }
 .locationImage{
-	display: block;
-	margin-top: 5%;
-	margin: 1%;
+	display: inline-block;
+	margin-top: 7%;
+	margin-left: -4.5%;
 	width: 30%;
-	height: 20%;
+	height: 30%;
 }
 .name{
 	display: block;
-	margin-left: 30%;
-	margin-top: -25%;
-	font-size: 50px;
-	font-weight: bold;
-	color: black;
-	border-width: .15vw;
-	border-color: #49669D;
-	border-style: solid;
-	border-radius: 3vh;
+	margin-left: 17%;
+	margin-top: -10%;
 }
 .ratingTable{
 	display: block;
-	margin-top: 10%;
-	margin-left: 1%;
+	margin-left: 45%;
 	margin-right: 1%;
+	margin-top: -8%;
 	margin-bottom: 1%;
 	padding-left: 1%;
 	padding-top: 1%;
 	padding-bottom: 1%;
 	float:left;
 	height: 30%;
-	width: 30%;
+	width: 20%;
 	border-radius: 15px;
 	background-color: rgb(140, 140, 140, .6);
 	color: white;
+	border-width: .15vw;
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 1.5vh;
 }
 .reviews{
 	width: 100%;
 }
 .reviewTable{
 	display: block;
-	margin: 1%;
-	padding-left: 1%;
-	padding-top: 1%;
+	border-width: .15vw;
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 1.5vh;
+	margin-left: 1%;
+	margin-top: 1%;
+	padding: 1%;
 	padding-bottom: 1%;
 	float:left;
-	height: 50%;
-	width: 90%;
+	height: 35vw;
+	width: 64%;
 	border-radius: 15px;
 	background-color: rgb(140, 140, 140, .6);
-	color: white;
+	color: black;
+}
+.revBody{
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 1vh;
+	display: block;
+	border-collapse: collapse;
+	background-color: #F0F0F0;
+	padding: 1%;
+	margin: 1%;
 }
 .n{
-	margin-bottom: 0;
+	font-size: 70px;
+	color: #4BA5FF;
+}
+.a{
+	font-size: 20px;
+	color: black;
 }
 .b{
 	position: absolute;
 	left: 20vw;
 	top: 20vh;
+	margin-left: -19%;
+	margin-top: 7%;
+	color: white;
 }
 
 #resultscontainer{
 	position: absolute;
 	top: 10vh;
 	left: 60vw;
-	height: 55vh;
-	width: 35vw;
+	height: 40vh;
+	width: 30vw;
 	border-width: .15vw;
 	border-color: #49669D;
 	border-style: solid;
 	border-radius: 3vh;
 	background: rgb(128,128,128, 0.70);
+	margin-top: 1.5%;
+	margin-left: 7%;
 }
 #mapcontainer {
 	width: 100%;

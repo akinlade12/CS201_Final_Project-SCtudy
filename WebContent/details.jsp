@@ -216,19 +216,21 @@
 		<!-- Details -->
 		<div class="locationImage"><img src=<%= currentSearch.getPhotoURL() %> alt="Study Space Image"></div>
 		<div class="name">
-			<div class="n">Name</div>
-				<div class="b" id="b">
-					<button id="favorite" onclick="favorite()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;"><%=favorite %></button>
-					<button id="review" onclick="show()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Write a Review</button>
-				</div>
-				<script>
-					if(logged == null) 
-						$("#b").hide();
-					else if(logged) 
-						$("#b").show();
-					else if(!logged) 
-						$("#b").hide();
-				</script>
+			<div class="n"><%= currentSearch.getName() %></div>
+			<div class="a"><%= currentSearch.getAddress() %></div>
+			<div class="a"><%= currentSearch.getPhone() %></div>
+			<div class="b" id="b">
+				<button id="favorite" onclick="favorite()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;"><%=favorite %></button>
+				<button id="review" onclick="show()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Write a Review</button>
+			</div>
+			<script>
+				if(logged == null) 
+					$("#b").hide();
+				else if(logged) 
+					$("#b").show();
+				else if(!logged) 
+					$("#b").hide();
+			</script>
 		</div>
 		<div class="overallRatings">
 			<table class="ratingTable">
@@ -277,6 +279,7 @@
 		<!-- Review Table: will ultimately put this in a for loop to list the proper amount of reviews -->
 		<div class="reviews">
 			<table class = "reviewTable">
+			<tbody class="revBody">
 				<tr>
 					<td><i>Username</i></td>
 				</tr>
@@ -287,6 +290,7 @@
 				<tr>
 					<td>Written Review: </td>
 				</tr>
+			</tbody>
 			</table>
 		</div>
 		
