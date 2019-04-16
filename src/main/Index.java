@@ -77,10 +77,16 @@ public class Index extends HttpServlet {
 		String noise = request.getParameter("noiseForm");
 		System.out.println("noise level: " + noise);
 
-		String inOrOut = request.getParameter("inOrOutForm");
+		String in = request.getParameter("inOrOutForm");
+		Boolean inOrOut = true;
+		if(in.contentEquals("Indoor"))
+			inOrOut = false;
 		System.out.println("indoor outdoor: " + inOrOut);
 
-		String cafe = request.getParameter("cafeForm");
+		String caf = request.getParameter("cafeForm");
+		Boolean cafe = true;
+		if(caf.contentEquals("No"))
+			cafe = false;
 		System.out.println("cafe: " + cafe);
 
 		String hoursOpen = request.getParameter("hourOpenForm");
@@ -179,8 +185,12 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!cafe.contains("Choose")) {
-		            if(cafe.contains("Yes") && !rs.getBoolean("cafeAvailability")) {
+	            if (!caf.contains("Choose")) {
+	            	Boolean check = (Boolean) rs.getObject("cafeAvailability");
+	            	Boolean verify = false;
+	            	if((check && cafe) || (!check && !cafe))
+	            		verify = true;
+		            if(!verify) {
 		            	allParams = false;
 		            	if(cafeReq.equals("true")) {
 		            		dontAdd = true;
@@ -213,9 +223,12 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
-	            if (!inOrOut.contains("Choose")) {
-
-		            if(!rs.getBoolean("indoorOutdoor") && inOrOut.contains("Oudoor")) {
+	            if (!in.contains("Choose")) {
+	            	Boolean check = (Boolean) rs.getObject("indoorOutdoor");
+	            	Boolean verify = false;
+	            	if((check && inOrOut) || (!check && !inOrOut))
+	            		verify = true;
+		            if(!verify) {
 		            	allParams = false;
 		            	if(inOrOutReq.equals("true")) {
 		            		dontAdd = true;
