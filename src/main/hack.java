@@ -143,6 +143,7 @@ public class hack extends HttpServlet {
 	        session.setAttribute("loggedIn", false);
 	        
 			response.getWriter().write(Boolean.toString(false));
+			
 		} else if (action.equalsIgnoreCase("favorite")) {
 			System.out.println("Here");
 			Connection conn = null;
@@ -158,6 +159,35 @@ public class hack extends HttpServlet {
 				ps.setString(1, userID);
 				ps.setString(2, locationID);
 				ps.execute();
+				response.getWriter().write("Unfavorite");
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			} catch (ClassNotFoundException cnfe) {
+				cnfe.printStackTrace();
+			} 
+			finally {
+				try {
+					if(ps != null) { ps.close(); }
+					if(conn != null) { conn.close(); }
+				}catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+			}
+			
+		} else if (action.equalsIgnoreCase("Unfavorite")) {
+			System.out.println("no here");
+			Connection conn = null;
+			PreparedStatement ps = null;
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver"); //throws classNotFound exception 
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root&serverTimezone=UTC");		
+				ps = conn.prepareStatement("DELETE FROM sctudy.favorites WHERE userID=? AND locationID=?");
+				int user = (int) session.getAttribute("user");
+				int loc = ((StudySpace) session.getAttribute("currentStudySpot")).getLocationID();
+				ps.setInt(1, user);
+				ps.setInt(2, loc);
+				ps.execute();
+				response.getWriter().write("Favorite");
 			} catch (SQLException sqle) {
 				sqle.printStackTrace();
 			} catch (ClassNotFoundException cnfe) {

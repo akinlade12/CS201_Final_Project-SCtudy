@@ -81,13 +81,14 @@
 			})
 		}
 		function favorite(){
+			
 			$.ajax({
 				url: "hack",
 				data: {
-					action: "favorite"
+					action: document.getElementById("favorite").innerHTML
 				},
 				success: function(result) {
-
+					document.getElementById("favorite").innerHTML = result;
 				}
 			})	
 		}
@@ -95,8 +96,8 @@
 	</script>
 	<script>
 		function initialize() {
-			var latitude = <%= space.getLatitude()%>;
-			var longitude = <%= space.getLongitude()%>;
+			var latitude = <%= currentSearch.getLatitude()%>;
+			var longitude = <%= currentSearch.getLongitude()%>;
 			var pos = {lat: latitude, lng: longitude};
 			var mapOptions = {
 					center: pos,
@@ -105,7 +106,7 @@
 			var map = new google.maps.Map(document.getElementById('map'), mapOptions); //make map
 			
 			var i;
-			<% String refs = space.getName(); %>
+			<% String refs = currentSearch.getName(); %>
 			var t = '<%= refs%>';
 			var marker = new google.maps.Marker({
 				position: pos,
