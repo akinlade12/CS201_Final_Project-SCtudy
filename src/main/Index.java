@@ -147,7 +147,7 @@ public class Index extends HttpServlet {
 	    Vector<Pair> numbMatchPair = new Vector<>();
 	    try {
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=Toyosi12");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root");
 	    	
 	    	st = conn.createStatement();
 	    	rs = st.executeQuery("SELECT * from studyspaces");
