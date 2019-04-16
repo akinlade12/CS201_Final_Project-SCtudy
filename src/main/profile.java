@@ -141,8 +141,7 @@ public class profile extends HttpServlet {
 				favorite.setBuilding(rs.getString("buildingCode"));
 				System.out.println("buildingCode: " + favorite.getBuilding());
 				
-				int rating = calculateRating(favorite.getLocationID());
-				favorite.setRating(rating);
+				favorite.setRating(rs.getDouble("rating"));
 				System.out.println("rating: " + favorite.getRating());
 			}
 			
@@ -164,9 +163,9 @@ public class profile extends HttpServlet {
 			System.out.println("> FATAL ERROR: Failed to establish database connection.");
 			e.printStackTrace();
 		}
-		// commenting out for testing : 
-		// int userID = Integer.parseInt((String)  session.getAttribute("user"));
-		int userID = 1;
+		//commenting out for testing : 
+		int userID = (int) session.getAttribute("user");
+		// int userID = 1;
 		
 		Vector<StudySpace> favorites = new Vector<StudySpace>();
 		

@@ -9,6 +9,15 @@
 	
 	if(currentSearch == null)
 		currentSearch = space;
+	
+	Boolean favorited = (Boolean) request.getAttribute("favorited");
+	String favorite = "";
+	if(favorited == null || !favorited) {
+		favorite = "Favorite";
+	}
+	else {
+		favorite = "Unfavorite";
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -126,10 +135,8 @@
 	          // Browser doesn't support Geolocation
 	          handleLocationError(false, infoWindow, map.getCenter());
 	        }
-		 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-		   	
+		 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {   	
 		    }
-			
 		}
 	</script>
 
@@ -180,7 +187,7 @@
 			</div>
 			<div id="in">
 				<div class ="upper" id = "profile">
-					<a href="profile.jsp" id = "login" >
+					<a href="profile" id = "login" >
 						Profile
 					</a>
 				</div>
@@ -209,13 +216,18 @@
 		<div class="locationImage"><img src=<%= currentSearch.getPhotoURL() %> alt="Study Space Image"></div>
 		<div class="name">
 			<div class="n">Name</div>
-				<div class="b">
-		<!-- add on click functionality -->
-
-					<button id="favorite" onclick="favorite()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Favorite</button>
+				<div class="b" id="b">
+					<button id="favorite" onclick="favorite()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;"><%=favorite %></button>
 					<button id="review" onclick="show()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Write a Review</button>
-	
 				</div>
+				<script>
+					if(logged == null) 
+						$("#b").hide();
+					else if(logged) 
+						$("#b").show();
+					else if(!logged) 
+						$("#b").hide();
+				</script>
 		</div>
 		<div class="overallRatings">
 			<table class="ratingTable">

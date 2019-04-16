@@ -153,8 +153,6 @@ table{
 	border-style: solid;
 	border-radius: 1.5vh;
 }
-#title{
-}
 .title{
 	display: inline-block;
 	text-decoration: none;
@@ -237,7 +235,7 @@ img {
 	position: absolute;
 	right: 3vw;
 	top: 1vh;
-	width:8vw;
+	width:9vw;
 	height: 3vh;
 	display: flex;
 	flex-direction: row;
@@ -247,7 +245,7 @@ img {
 	position: absolute;
 	right: 3vw;
 	top: 1vh;
-	width:8vw;
+	width:9vw;
 	height: 3vh;
 	display: flex;
 	flex-direction: row;
@@ -256,7 +254,11 @@ img {
 .upper{
 	text-decoration: none;
 	font-size: 2.5vh;
+	
 }
 #login, #register{
 	color: black;
+	width: 4vw;
+	white-space: no-wrap;
+	overflow: hidden;
 }

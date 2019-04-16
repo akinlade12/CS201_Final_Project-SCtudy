@@ -29,7 +29,7 @@
 			</div>
 			<div id="in">
 				<div class ="upper" id = "profile">
-					<a href="profile.jsp" id = "login" >
+					<a href="profile" id = "login" >
 						Profile
 					</a>
 				</div>

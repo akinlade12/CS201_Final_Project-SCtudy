@@ -106,12 +106,17 @@ table{
 	border-radius: 1.5vh;
 }
 .title{
+	display: inline-block;
 	text-decoration: none;
 	font-weight: bold;
 	font-size: 3.5vh;
 	position: relative;
 	left: 16vw;
 	bottom: 19vh;
+	max-width: 11vw;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 a{
 	color: #4BA5FF;

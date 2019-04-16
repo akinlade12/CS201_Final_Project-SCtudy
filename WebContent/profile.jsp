@@ -55,7 +55,7 @@
 			</div>
 			<div id="in">
 				<div class ="upper" id = "profile">
-					<a href="profile.jsp" id = "login" >
+					<a href="profile" id = "login" >
 						Profile
 					</a>
 				</div>
@@ -106,7 +106,7 @@
 					int i;
 					for(i = 0; i < size; i++) {
 						StudySpace space = spaces.get(i);
-						String ref = "DetailsServlet?index=" + Integer.toString(i);
+						String ref = "hack?indexfav=" + Integer.toString(i);
 						int rating = (int) Math.round(space.getRating());
 						
 						String c;

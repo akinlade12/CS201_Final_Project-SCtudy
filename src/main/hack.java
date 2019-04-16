@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -38,17 +39,97 @@ public class hack extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
-		Vector<StudySpace> spaces = (Vector<StudySpace>) session.getAttribute("studySpaces");
-		System.out.println(spaces.get(0).getName());
+		
+		Vector<StudySpace> spaces = (Vector<StudySpace>) session.getAttribute("studySpaces"); //coming from results
 		if(spaces != null) {
 			String i = request.getParameter("index");
 			if(i != null) {
 				int index = Integer.parseInt(i);
 				session.setAttribute("currentStudySpot", spaces.get(index));
+			    if(session.getAttribute("user") != null) { //only checking if logged in
+			    	int userID = (int) session.getAttribute("user");
+			    	Connection conn = null; //checking to see if spot has been favorited
+					PreparedStatement ps = null;
+					ResultSet rs = null;
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver"); //throws classNotFound exception 
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root&serverTimezone=UTC");		
+						ps = conn.prepareStatement("SELECT locationID from favorites WHERE locationID=? AND userID = ?");
+						int loc = ((StudySpace) session.getAttribute("currentStudySpot")).getLocationID();
+						ps.setInt(1, loc);
+						ps.setInt(2, userID);
+						rs = ps.executeQuery();
+						if(rs.next()) {
+							request.setAttribute("favorited", true);
+						}
+						else
+							request.setAttribute("favorited", false);
+						
+					} catch (SQLException sqle) {
+						sqle.printStackTrace();
+					} catch (ClassNotFoundException cnfe) {
+						cnfe.printStackTrace();
+					} 
+					finally {
+						try {
+							if(ps != null) { ps.close(); }
+							if(conn != null) { conn.close(); }
+						}catch (SQLException sqle) {
+							sqle.printStackTrace();
+						}
+					}
+			    }
+			    
 				RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/details.jsp");
 			    dispatch.forward(request, response);
+			    return;
 			}
-			return;
+		}
+		
+		Vector<StudySpace> favorites = (Vector<StudySpace>) session.getAttribute("favorites"); //coming from profile
+		if(favorites != null) {
+			String i = request.getParameter("indexfav");
+			if(i != null) {
+				int index = Integer.parseInt(i);
+				session.setAttribute("currentStudySpot", favorites.get(index));
+			    if(session.getAttribute("user") != null) { //only checking if logged in
+			    	int userID = (int) session.getAttribute("user");
+			    	Connection conn = null; //checking to see if spot has been favorited
+					PreparedStatement ps = null;
+					ResultSet rs = null;
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver"); //throws classNotFound exception 
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root&serverTimezone=UTC");		
+						ps = conn.prepareStatement("SELECT locationID from favorites WHERE locationID=? AND userID = ?");
+						int loc = ((StudySpace) session.getAttribute("currentStudySpot")).getLocationID();
+						ps.setInt(1, loc);
+						ps.setInt(2, userID);
+						rs = ps.executeQuery();
+						if(rs.next()) {
+							request.setAttribute("favorited", true);
+						}
+						else
+							request.setAttribute("favorited", false);
+						
+					} catch (SQLException sqle) {
+						sqle.printStackTrace();
+					} catch (ClassNotFoundException cnfe) {
+						cnfe.printStackTrace();
+					} 
+					finally {
+						try {
+							if(ps != null) { ps.close(); }
+							if(conn != null) { conn.close(); }
+						}catch (SQLException sqle) {
+							sqle.printStackTrace();
+						}
+					}
+			    }
+			    
+				RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/details.jsp");
+			    dispatch.forward(request, response);
+			    return;
+			}
 		}
 		
 		String action = request.getParameter("action");
@@ -63,13 +144,15 @@ public class hack extends HttpServlet {
 	        
 			response.getWriter().write(Boolean.toString(false));
 		} else if (action.equalsIgnoreCase("favorite")) {
+			System.out.println("Here");
 			Connection conn = null;
 			PreparedStatement ps = null;
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver"); //throws classNotFound exception 
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root&serverTimezone=UTC");		
 				ps = conn.prepareStatement("INSERT INTO sctudy.favorites (userID, locationID) VALUES  (?, ?)");
-				String userID = (String) session.getAttribute("user");
+				int user = (int) session.getAttribute("user");
+				String userID = Integer.toString(user);
 				int loc = ((StudySpace) session.getAttribute("currentStudySpot")).getLocationID();
 				String locationID = Integer.toString(loc);
 				ps.setString(1, userID);

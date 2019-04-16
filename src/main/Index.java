@@ -137,7 +137,7 @@ public class Index extends HttpServlet {
 	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root");
 	    	
 	    	st = conn.createStatement();
-	    	rs = st.executeQuery("SELECT * from studySpaces");
+	    	rs = st.executeQuery("SELECT * from studyspaces");
 	    	while(rs.next()) {
 	    		// changes to true if desired parameter is required but study space does not have parameter
 	    		Boolean dontAdd = false;
