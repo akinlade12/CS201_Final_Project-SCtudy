@@ -6,7 +6,8 @@
 	StudySpace space = new StudySpace("Space 1", -118.282968, 34.022100, "bovard.jpg", "Sparse", "Couch", "LED", 2,
 		true, false, "8:00am", "5:00pm", "(925) 587-3144", "1800 Your Butt St", "WPH 209", 3.65, 5);
 	
-	currentSearch = space;
+	if(currentSearch == null)
+		currentSearch = space;
 %>
 <!DOCTYPE html>
 <html>

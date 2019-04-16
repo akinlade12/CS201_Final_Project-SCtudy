@@ -66,7 +66,7 @@
 						label: labels[labelIndex++ % labels.length],
 					});
 					markerArray.push(marker);
-					var contentString = '<a href="DetailsServlet?index=' + i + '">' + t + '</a>';
+					var contentString = '<a href="hack?index=' + i + '">' + t + '</a>';
 					var infowindow = new google.maps.InfoWindow({
 						content: contentString
 					});
@@ -360,7 +360,7 @@
 					int i;
 					for(i = 0; i < size; i++) {
 						StudySpace space = spaces.get(i);
-						String ref = "DetailsServlet?index=" + Integer.toString(i);
+						String ref = "hack?index=" + Integer.toString(i);
 						int rating = (int) Math.round(space.getRating());
 						
 						String c;

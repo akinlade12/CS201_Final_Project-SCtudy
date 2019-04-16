@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Vector;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +38,19 @@ public class hack extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
+		Vector<StudySpace> spaces = (Vector<StudySpace>) session.getAttribute("studySpaces");
+		System.out.println(spaces.get(0).getName());
+		if(spaces != null) {
+			String i = request.getParameter("index");
+			if(i != null) {
+				int index = Integer.parseInt(i);
+				session.setAttribute("currentStudySpot", spaces.get(index));
+				RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/details.jsp");
+			    dispatch.forward(request, response);
+			}
+			return;
+		}
+		
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("checkStatus")) {
 			boolean loggedIn = (Boolean) session.getAttribute("loggedIn");
