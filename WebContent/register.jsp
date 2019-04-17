@@ -50,10 +50,10 @@
 				</div>
 				
 				<div class="password">
-					Password<br/><input class="passinput" id="password" type="text" name="password">
+					Password<br/><input class="passinput" id="password" type="password" name="password">
 					<br/>
 					<div class="passCheck">
-					Confirm Password<br/><input class="passinput" id="recPassword" type="text" name="recPassword">
+					Confirm Password<br/><input class="passinput" id="recPassword" type="password" name="recPassword">
 					</div>
 					<br/>
 					<strong><div id="errorMessage"></div></strong>
