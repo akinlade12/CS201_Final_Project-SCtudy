@@ -1,8 +1,17 @@
 #submitField{
-	width: 200%;
+	width: 30vw;
+	position: absolute;
+	left: -6vw;
+	top: -3vh;
+	font-size: 20pt;
+	padding-left: 1vw;
+	border-radius: 10px;
 }
 #submitButton{
-	margin-left: 65%;
+	margin-left: 165%;
+	position: relative;
+	bottom: 2vh;
+	margin-bottom: 140%;
 }
 #search-div{
 	position: absolute;
@@ -91,4 +100,15 @@
 	color: black;
 	margin-left: -25%;
 	padding: 4%;
+}
+#info{
+	position: absolute;
+	left: 0vw;
+	bottom: 10vh;
+}
+#motto{
+	font-size: 60pt;
+	position: absolute;
+	top: 8vh;
+	left: 32vw;
 }

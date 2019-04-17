@@ -58,6 +58,7 @@
 				}
 			</script>
 		</div>
+		<div id="motto">Find your space...</div>
 		<div id = "search-div">
 			<form class="submitForm" action="Index" method="POST">
 	  			<input id="submitField" class="submitField" name="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit"><br><br>
