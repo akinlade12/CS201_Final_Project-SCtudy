@@ -173,7 +173,7 @@ public class Index extends HttpServlet {
 		            }
 	            }
 	            if(rs.getString("sName").contains(submitField)) {
-	            	numbOfParams = 10;
+	            	numbOfParams += 10;
 	            }
 	            if (!lights.contains("Choose")) {
 		            if(!rs.getString("lightSource").contains(lights)) {

@@ -149,22 +149,24 @@
 	<body background="background.jpg">
 		<div id="myModal" class="modal">
 		  <!-- Modal content -->
-		  <div class="modal-content">
+		  <div class="modal-content" style = "border-radius: 3vh; width: 30%; top: 40%">
 		    <span class="close" onclick ="close1()">&times;</span>
-		    <p>Submit a review</p>
+		    <p style = "font-size:50px; text-align: center;">Submit a review</p>
 		    <form id = "rev"method="GET" action = "review">
-			    <textarea id = "reviewT" name = "reviewT" type = "text" style="height: 250px;" value = ""></textarea>
-			    <input type = "submit">
+			    <textarea id = "reviewT" name = "reviewT" type = "text" style="font-size:50px;display: block; height: 25vh; width: 20vw; margin-left: auto; margin-right: auto;" value = ""></textarea>
 			    <input id = "ratingT" name = "ratingT" type = "text" style = "display: none" value = <%=currentSearch.getRating()%>>
 			    <input id = "spaceID" name = "spaceID" type = "text" style = "display: none"value = <%=currentSearch.getLocationID() %>>
-			    Rating
-			    <select id = "rating" name = "rating">
+			    <div style = "position: relative; left: 19vw; top: 1vh; display: inline-block">
+			    <p style = "font-size:50px; display: inline-block; margin-right: .5vw">Rating</p>
+			    <select id = "rating" name = "rating" style = "width: 3vw" >
 				  <option value="1">1</option>
 				  <option value="2">2</option>
 				  <option value="3">3</option>
 				  <option value="4">4</option>
 				  <option value="5">5</option>
 				</select>
+				</div>
+				<input type = "submit" style ="position: relative; top: 1vh;left: -1vw; width: 3vw; height: 4vh">
 		    </form>
 		  </div>
 		</div>
@@ -335,3 +337,4 @@
 		
 	</body>
 </html>
+

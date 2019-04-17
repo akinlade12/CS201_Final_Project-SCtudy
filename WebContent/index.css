@@ -1,33 +1,42 @@
-
-
+#submitField{
+	width: 200%;
+}
+#submitButton{
+	margin-left: 65%;
+}
 #search-div{
 	position: absolute;
 	 top:40%;
-	 left:35%;
+	 left:40%;
 }
 
+#info{
+	position: absolute;
+	margin-top: 48%;
+	margin-left: 40%;
+}
 #params{
 	position: absolute;
 	 top:50%;
-	 left:20%;
+	 left:32%;
 }
 
 #params2{
 	position: absolute;
 	 top:60%;
-	 left:20%;
+	 left:32%;
 }
 
 #params3{
 	position: absolute;
 	 top:70%;
-	 left:20%;
+	 left:32%;
 }
 
 #params4{
 	position: absolute;
 	 top:80%;
-	 left:20%;
+	 left:32%;
 }
 #logo{
 	color: black;
@@ -35,6 +44,7 @@
 	font-family: Courier; 
 	font-size: 30px;
 	text-decoration: none;
+	margin: 1%;
 }
 #out{
 	position: absolute;
@@ -60,9 +70,25 @@
 	text-decoration: none;
 	font-size: 2.5vh;
 }
-#login, #register{
+#profile{
 	color: black;
+	margin-left: -30%;
+	padding: 4%;
+
 }
+#logout{
+	color: black;
+	margin-left: -25%;
+	padding: 4%;
+}
+#login{
+	color: black;
+	margin-left: -30%;
+	padding: 4%;
 
-
-
+}
+#register{
+	color: black;
+	margin-left: -25%;
+	padding: 4%;
+}
