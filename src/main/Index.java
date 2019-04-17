@@ -147,7 +147,7 @@ public class Index extends HttpServlet {
 	    Vector<Pair> numbMatchPair = new Vector<>();
 	    try {
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=root");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sctudy?user=root&password=Toyosi12");
 	    	
 	    	st = conn.createStatement();
 	    	rs = st.executeQuery("SELECT * from studyspaces");
@@ -210,21 +210,48 @@ public class Index extends HttpServlet {
 		            }
 	            }
 	            // FIX TO FIND RANGE
+	            Boolean open = false;
 	            if (!hoursOpen.contains("Choose")) {
-		            if(!rs.getObject("hourOpen").equals(hoursOpen)) {
+	            	Double hoursOpenInt = Double.parseDouble(hoursOpen);
+	            	String s = (String)rs.getObject("hourOpen");
+	            	if(s.contains("12am")) {
+	            		s = "0am";
+	            	}
+
+	            	s = s.substring(0, s.length() - 2);
+	            	if(s.contains("7:30")) {
+	            		s = "7.5";
+	            	}
+	            	if(hoursOpenInt < Double.parseDouble((s))){
 		            	allParams = false;
 		            	if(hoursOpenReq.equals("true")) {
 		            		dontAdd = true;
 		            	}
 		            } else {
+		            	open = true;
 		            	numbOfParams++;
 		            }
 	            }
 	            
-	            // FIX TO FIND RANGE
-	            if (hoursClose.contains("Choose")) {
-
-		            if(!rs.getObject("hourClose").equals(hoursClose)) {
+	            if (!hoursClose.contains("Choose")) {
+	            	
+	            	Double hoursCloseInt = Double.parseDouble(hoursClose);
+	            	String s = (String)rs.getObject("hourClose");
+	            	double pm = 0.0;
+	            	if (s.substring(s.length() - 2, s.length()).contentEquals("pm")) {
+	            		pm = 12.0;
+	            	}
+	            	if(s.contentEquals("12pm")) {
+	            		pm = 0.0;
+	            		
+	            	}
+	            	if(s.contentEquals("12am")) {
+	            		numbOfParams++;
+	            	}
+	            	
+	            	s = s.substring(0, s.length() - 2);
+	            	
+	            	if(hoursCloseInt > (Double.parseDouble((s)) + pm)){
 		            	allParams = false;
 		            	if(hoursCloseReq.equals("true")) {
 		            		dontAdd = true;
@@ -233,6 +260,7 @@ public class Index extends HttpServlet {
 		            	numbOfParams++;
 		            }
 	            }
+	            
 	            if (!in.contains("Choose")) {
 	            	Boolean check = (Boolean) rs.getObject("indoorOutdoor");
 	            	Boolean verify = false;
@@ -349,3 +377,4 @@ public class Index extends HttpServlet {
 	}
 
 }
+
