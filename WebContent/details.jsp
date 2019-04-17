@@ -145,6 +145,7 @@
 		<meta charset="UTF-8">
 		<title><%=currentSearch.getName() %></title>
 		<link rel="stylesheet" type="text/css" href="details.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body background="background.jpg">
@@ -217,8 +218,26 @@
 		<div class="locationImage"><img src=<%= currentSearch.getPhotoURL() %> alt="Study Space Image"></div>
 		<div class="name">
 			<div class="n"><%= currentSearch.getName() %></div>
+			<div class="reviewstars">
+				<%
+					int rating = (int) Math.round(currentSearch.getRating());
+					int j;
+					for(j = 0; j < rating; j++) { 
+				%>
+				<span class="fa fa-star checked"></span>
+				<%	}
+					while(j < 5) {
+				%>
+				<span class="fa fa-star"></span>
+				<%
+						j++;
+					}
+				%>
+				
+			</div>
 			<div class="a"><%= currentSearch.getAddress() %></div>
 			<div class="a"><%= currentSearch.getPhone() %></div>
+			<div class="a"><%= currentSearch.getBuilding() %></div>
 			<div class="b" id="b">
 				<button id="favorite" onclick="favorite()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;"><%=favorite %></button>
 				<button id="review" onclick="show()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Write a Review</button>
@@ -236,35 +255,35 @@
 			<table class="ratingTable">
 				<tr>
 					<th> Overall Rating:</th>
-					<th><%= currentSearch.getRating() %></th>
+					<th class="value"><%= currentSearch.getRating() %></th>
 				</tr>
 				<tr>
 					<th> Hours:</th>
-					<th><%= currentSearch.getHourOpen() %> to <%= currentSearch.getHourClose() %></th>
+					<th class="value"><%= currentSearch.getHourOpen() %> to <%= currentSearch.getHourClose() %></th>
 				</tr>
 				<tr>
 					<th> Outlet Availability:</th>
-					<th><%= currentSearch.getOutlet() %></th>
+					<th class="value"><%= currentSearch.getOutlet() %></th>
 				</tr>
 				<tr>
 					<th> Seating Type:</th>
-					<th><%= currentSearch.getSeats() %></th>
+					<th class="value"><%= currentSearch.getSeats() %></th>
 				</tr>
 				<tr>
 					<th> Light Source:</th>
-					<th><%= currentSearch.getLights() %></th>
+					<th class="value"><%= currentSearch.getLights() %></th>
 				</tr>
 				<tr>
 					<th> Noise Level:</th>
-					<th><%= currentSearch.getNoise() %></th>
+					<th class="value"><%= currentSearch.getNoise() %></th>
 				</tr>
 				<tr>
 					<th> Cafe Availability:</th>
-					<th><%= currentSearch.getCafe() %></th>
+					<th class="value"><%= currentSearch.getCafe() %></th>
 				</tr>
 				<tr>
 					<th> Indoor/Outdoor:</th>
-					<th><%= currentSearch.getOutside() %></th>
+					<th class="value"><%= currentSearch.getOutside() %></th>
 				</tr>
 			</table>
 		</div>
@@ -281,9 +300,7 @@
 			<table class = "reviewTable">
 			<tbody class="revBody">
 				<tr>
-					<td><i>Username</i></td>
-				</tr>
-				<tr>
+					<td><i>Username</i></td> <!-- to be replaced by actual username, maybe put in same row as overall rating -->
 					<td>Overall Rating: </td>
 					<td></td>
 				</tr>

@@ -15,16 +15,37 @@
 	margin-bottom: 3%;
 }
 .locationImage{
-	display: inline-block;
-	margin-top: 7%;
-	margin-left: -4.5%;
-	width: 30%;
-	height: 30%;
+	position: absolute;
+	top: 10vh;
+	left: 5vw;
+	width: 26vw;
+	height: 36vh;
+	border-width: .15vw;
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 1.5vh;
+}
+img{
+	width: 100%;
+	height: 100%;
+	border-radius: 2vh;
+	object-fit: contain;
 }
 .name{
-	display: block;
-	margin-left: 17%;
-	margin-top: -10%;
+	position: absolute;
+	top: 6vh;
+	left: 33vw;
+}
+.reviewstars{
+	position: relative;
+	width: 10vw;
+	height: 5vh;
+}
+.overallRatings{
+	position: absolute;
+	right: 24vw;
+	top: 12vh;
+	height: 50vh;
 }
 .ratingTable{
 	display: block;
@@ -36,8 +57,8 @@
 	padding-top: 1%;
 	padding-bottom: 1%;
 	float:left;
-	height: 30%;
-	width: 20%;
+	height: 70%;
+	width: 180%;
 	border-radius: 15px;
 	background-color: rgb(140, 140, 140, .6);
 	color: white;
@@ -46,8 +67,21 @@
 	border-style: solid;
 	border-radius: 1.5vh;
 }
+tr{
+	height: 4.3vh;
+}
+th{
+	position: relative;
+	left: 1vw;
+}
+.value{
+	left: 10vw;
+}
 .reviews{
 	width: 100%;
+	position: absolute;
+	left: 4vw;
+	bottom: 0vh;
 }
 .reviewTable{
 	display: block;
@@ -60,8 +94,8 @@
 	padding: 1%;
 	padding-bottom: 1%;
 	float:left;
-	height: 35vw;
-	width: 64%;
+	height: 23vw;
+	width: 60%;
 	border-radius: 15px;
 	background-color: rgb(140, 140, 140, .6);
 	color: black;
@@ -77,7 +111,7 @@
 	margin: 1%;
 }
 .n{
-	font-size: 70px;
+	font-size: 68px;
 	color: #4BA5FF;
 }
 .a{
@@ -85,9 +119,12 @@
 	color: black;
 }
 .b{
-	position: absolute;
-	left: 20vw;
-	top: 20vh;
+	display: flex;
+	justify-content: space-between;
+	width: 16vw;
+	position: relative;
+	left: 13.5vw;
+	bottom: 21vh;
 	margin-left: -19%;
 	margin-top: 7%;
 	color: white;
@@ -95,9 +132,9 @@
 
 #resultscontainer{
 	position: absolute;
-	top: 10vh;
+	bottom: 0vh;
 	left: 60vw;
-	height: 40vh;
+	height: 23vw;
 	width: 30vw;
 	border-width: .15vw;
 	border-color: #49669D;
@@ -162,7 +199,9 @@
 
 #logo{
 	color: black;
-	float: left; 
+	position: absolute;
+	top: 1vh;
+	left: 1.5vw;
 	font-family: Courier; 
 	font-size: 30px;
 	text-decoration: none;
