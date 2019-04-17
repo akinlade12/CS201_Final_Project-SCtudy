@@ -175,9 +175,12 @@
 		               type: "POST",
 		               url: 'review',
 		               data: form.serialize(), // serializes the form's elements.
+		               success: function(data) {
+		            	   close1();
+		               }
 		             });
 		    	});
-		    	close1();
+		    	
 		    </script>
 		  </div>
 		</div>
@@ -356,6 +359,7 @@
 						'</tr>'
 				).appendTo('#reviewTable')
 				
+				test();
 				
 				
 				
@@ -381,7 +385,9 @@
 						action: "test"
 					},
 					success: function(result) {
-						handleData(result);
+						if(result != null && result != "") {
+							handleData(result);
+						}
 					}
 				});
 				
@@ -390,7 +396,7 @@
 			</table>
 		</div>
 		<script>
-		test();
+		window.onload=test;
 		window.onbeforeunload=logout;
 		function logout(){
 			$.ajax({

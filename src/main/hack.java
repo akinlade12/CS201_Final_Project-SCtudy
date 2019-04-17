@@ -47,6 +47,7 @@ public class hack extends HttpServlet {
 		Vector<StudySpace> spaces = (Vector<StudySpace>) session.getAttribute("studySpaces"); //coming from results
 		
 		if(spaces != null) {	
+			System.out.println("we out here");
 			String i = request.getParameter("index");
 			if(i != null) {
 				int index = Integer.parseInt(i);
@@ -117,8 +118,8 @@ public class hack extends HttpServlet {
 							users.add(rs.getString("username"));
 						}
 					}
-					ps = conn.prepareStatement("SELECT userID, username from users"); //get users
-					rs = ps.executeQuery();
+					//ps = conn.prepareStatement("SELECT userID, username from users"); //get users
+					//rs = ps.executeQuery();
 			
 					request.setAttribute("usernames", users);
 					request.setAttribute("ratings", ratings);
@@ -147,10 +148,13 @@ public class hack extends HttpServlet {
 		System.out.println("here2");
 		Vector<StudySpace> favorites = (Vector<StudySpace>) session.getAttribute("favorites"); //coming from profile
 		if(favorites != null) {
+			spaces = favorites;
 			System.out.println("here3");
 			String ig = request.getParameter("indexfav");
 			if(ig != null) {
 				int indexf = Integer.parseInt(ig);
+				session.setAttribute("index", indexf);
+				System.out.println("here4");
 				session.setAttribute("currentStudySpot", favorites.get(indexf));
 			    if(session.getAttribute("user") != null) { //only checking if logged in
 			    	int userID = (int) session.getAttribute("user");
@@ -188,7 +192,7 @@ public class hack extends HttpServlet {
 					}
 			    }
 			    System.out.println("here1");
-			    Connection conn = null; //checking to see if spot has been favorited
+			    Connection conn = null; 
 				PreparedStatement ps = null;
 				ResultSet rs = null;
 				try {
@@ -219,7 +223,8 @@ public class hack extends HttpServlet {
 							users.add(rs.getString("username"));
 						}
 					}
-					
+					ps = conn.prepareStatement("SELECT userID, username from users"); //get users
+					rs = ps.executeQuery();
 					request.setAttribute("usernames", users);
 					request.setAttribute("ratings", ratings);
 					request.setAttribute("reviews", reviews);
@@ -236,7 +241,6 @@ public class hack extends HttpServlet {
 						sqle.printStackTrace();
 					}
 				}
-			    System.out.println("here2");
 				RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/details.jsp");
 			    dispatch.forward(request, response);
 			    return;
@@ -250,8 +254,10 @@ public class hack extends HttpServlet {
 		} else if(action.equalsIgnoreCase("leaving")) {
 			System.out.println("Made it");
 			TestThread th = (TestThread) session.getAttribute("thread");
-			th.setDone(true);
-			th.stop();
+			if(th != null) {
+				th.setDone(true);
+				th.stop();
+			}
 			session.setAttribute("thread", null);
 			session.setAttribute("first", false);
 		} 
