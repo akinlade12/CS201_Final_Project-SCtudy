@@ -24,6 +24,7 @@
 	border-color: #49669D;
 	border-style: solid;
 	border-radius: 1.5vh;
+	background-color: #F0F0F0;
 }
 img{
 	width: 100%;
@@ -44,8 +45,9 @@ img{
 .overallRatings{
 	position: absolute;
 	right: 24vw;
-	top: 12vh;
-	height: 50vh;
+	top: 22vh;
+	width: 17vw;
+	height: 40vh;
 }
 .ratingTable{
 	display: block;
@@ -68,7 +70,7 @@ img{
 	border-radius: 1.5vh;
 }
 tr{
-	height: 4.3vh;
+	height: 3.3vh;
 }
 th{
 	position: relative;
@@ -110,6 +112,20 @@ th{
 	padding: 1%;
 	margin: 1%;
 }
+#lastone{
+	position: relative;
+	top: 3vh;
+	width: 29vw;
+	right: 1vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 19vh;
+	background-color: #F0F0F0;
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 1vh;
+}
 .n{
 	font-size: 68px;
 	color: #4BA5FF;
@@ -117,16 +133,16 @@ th{
 .a{
 	font-size: 20px;
 	color: black;
+	position: relative;
+	left: 2vw;
 }
 .b{
 	display: flex;
 	justify-content: space-between;
 	width: 16vw;
-	position: relative;
-	left: 13.5vw;
-	bottom: 21vh;
-	margin-left: -19%;
-	margin-top: 7%;
+	position: absolute;
+	left: 6vw;
+	top: 12vh;
 	color: white;
 }
 
@@ -232,4 +248,24 @@ th{
 }
 #login, #register{
 	color: black;
+}
+i, .poop {
+	font-size: 3vh;
+}
+#butt{
+	
+}
+#contents{
+	font-size: 2.5vh;
+}
+#topreview{
+	display: flex;
+	justify-content: space-around;
+	width: 10vw;
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 3vh;
+}
+#nam{
+	color: #4BA5FF;
 }

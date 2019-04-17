@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="main.StudySpace" %>
+<%@ page import="java.util.ArrayList" %>
 <% Boolean logged = (Boolean) session.getAttribute("loggedIn");%>
 <% 
 	StudySpace currentSearch = (StudySpace) session.getAttribute("currentStudySpot");
@@ -18,6 +19,18 @@
 	else {
 		favorite = "Unfavorite";
 	}
+	ArrayList<String> users = (ArrayList<String>) request.getAttribute("usernames");
+	ArrayList<Integer> ratings = (ArrayList<Integer>) request.getAttribute("ratings");
+	ArrayList<String> reviews = (ArrayList<String>) request.getAttribute("reviews");
+	int size;
+	if(users == null)
+		size = 0;
+	else
+		size = users.size();
+	
+	System.out.println(users.size());
+	System.out.println(ratings.size());
+	System.out.println(reviews.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -48,22 +61,7 @@
 	    modal.style.display = "none";
 	  }
 	}
-		function user(){
-			$.ajax({
-				url: "hack",
-				data: {
-					action: "checkStatus"
-				},
-				success: function(result) {
-					if(result == "true"){
-						document.getElementById("login").style.display = "none";
-						document.getElementById("register").style.display = "none";
-						document.getElementById("profile").style.display = "inline-block";
-						document.getElementById("signOut").style.display = "inline-block";
-					}
-				}
-			})
-		}
+		
 		function signOut() {
 			$.ajax({
 				url: "hack",
@@ -235,9 +233,11 @@
 				%>
 				
 			</div>
-			<div class="a"><%= currentSearch.getAddress() %></div>
-			<div class="a"><%= currentSearch.getPhone() %></div>
-			<div class="a"><%= currentSearch.getBuilding() %></div>
+			<div id="lastone">
+				<div class="a"><%= currentSearch.getAddress() %></div>
+				<div class="a"><%= currentSearch.getPhone() %></div>
+				<div class="a"><%= currentSearch.getBuilding() %></div>
+			</div>
 			<div class="b" id="b">
 				<button id="favorite" onclick="favorite()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;"><%=favorite %></button>
 				<button id="review" onclick="show()" style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Write a Review</button>
@@ -254,7 +254,7 @@
 		<div class="overallRatings">
 			<table class="ratingTable">
 				<tr>
-					<th> Overall Rating:</th>
+					<th>Overall Rating:</th>
 					<th class="value"><%= currentSearch.getRating() %></th>
 				</tr>
 				<tr>
@@ -278,12 +278,24 @@
 					<th class="value"><%= currentSearch.getNoise() %></th>
 				</tr>
 				<tr>
-					<th> Cafe Availability:</th>
-					<th class="value"><%= currentSearch.getCafe() %></th>
+					<th> Cafe Available:</th>
+					<%	String c;
+						if (currentSearch.getCafe())
+							c = "Yes";
+						else
+							c = "No";
+					%>
+					<th class="value"><%= c %></th>
 				</tr>
 				<tr>
 					<th> Indoor/Outdoor:</th>
-					<th class="value"><%= currentSearch.getOutside() %></th>
+					<%	String o;
+						if (currentSearch.getOutside())
+							o = "Outdoors";
+						else
+							o = "Indoors";
+					%>
+					<th class="value"><%= o%></th>
 				</tr>
 			</table>
 		</div>
@@ -298,16 +310,26 @@
 		<!-- Review Table: will ultimately put this in a for loop to list the proper amount of reviews -->
 		<div class="reviews">
 			<table class = "reviewTable">
+			<%
+				int i;
+				for(i = 0; i < size; i++) {
+					System.out.println(i);
+			%>
 			<tbody class="revBody">
+			
 				<tr>
-					<td><i>Username</i></td> <!-- to be replaced by actual username, maybe put in same row as overall rating -->
-					<td>Overall Rating: </td>
-					<td></td>
+						<td class="poop"><b id="nam"><%=users.get(i)%></b> &nbsp; &nbsp; &nbsp; <b>Rating:</b> <%=ratings.get(i)%>/5</td> 
+						<td></td>
 				</tr>
 				<tr>
-					<td>Written Review: </td>
+					<td class="poop"><b>Review:</b> <%=reviews.get(i) %></td>
+					<td id="contents">  </td>
 				</tr>
+			
 			</tbody>
+			<%
+				}
+			%>
 			</table>
 		</div>
 		
