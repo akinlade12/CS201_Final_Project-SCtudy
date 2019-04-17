@@ -1,6 +1,7 @@
 package main;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -42,12 +43,14 @@ public class hack extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
-		
+		System.out.println("Made it here");
 		Vector<StudySpace> spaces = (Vector<StudySpace>) session.getAttribute("studySpaces"); //coming from results
-		if(spaces != null) {
+		
+		if(spaces != null) {	
 			String i = request.getParameter("index");
 			if(i != null) {
 				int index = Integer.parseInt(i);
+				session.setAttribute("index", index);
 				session.setAttribute("currentStudySpot", spaces.get(index));
 			    if(session.getAttribute("user") != null) { //only checking if logged in
 			    	int userID = (int) session.getAttribute("user");
@@ -145,10 +148,10 @@ public class hack extends HttpServlet {
 		Vector<StudySpace> favorites = (Vector<StudySpace>) session.getAttribute("favorites"); //coming from profile
 		if(favorites != null) {
 			System.out.println("here3");
-			String i = request.getParameter("indexfav");
-			if(i != null) {
-				int index = Integer.parseInt(i);
-				session.setAttribute("currentStudySpot", favorites.get(index));
+			String ig = request.getParameter("indexfav");
+			if(ig != null) {
+				int indexf = Integer.parseInt(ig);
+				session.setAttribute("currentStudySpot", favorites.get(indexf));
 			    if(session.getAttribute("user") != null) { //only checking if logged in
 			    	int userID = (int) session.getAttribute("user");
 			    	Connection conn = null; //checking to see if spot has been favorited
@@ -244,7 +247,43 @@ public class hack extends HttpServlet {
 		if (action.equalsIgnoreCase("checkStatus")) {
 			boolean loggedIn = (Boolean) session.getAttribute("loggedIn");
 			response.getWriter().write(Boolean.toString(loggedIn));
-		} else if (action.equalsIgnoreCase("signOut")) {
+		} else if(action.equalsIgnoreCase("leaving")) {
+			System.out.println("Made it");
+			TestThread th = (TestThread) session.getAttribute("thread");
+			th.setDone(true);
+			th.stop();
+			session.setAttribute("thread", null);
+			session.setAttribute("first", false);
+		} 
+		
+		else if(action.equalsIgnoreCase("test")) {
+			int index = (Integer) session.getAttribute("index");
+			TestThread t = new TestThread(spaces.get(index).getLocationID());
+			System.out.println("Made a thread");
+			t.start();
+			session.setAttribute("thread", t);
+			while(!t.getDone()) {
+				if(t.getCheck()) {
+					System.out.println("Checking");
+					String review = t.getReview();
+					String username = t.getUsername();
+					int rating = t.getRating();
+					request.setAttribute("review", review);
+					request.setAttribute("username", username);
+					request.setAttribute("rating", rating);
+					System.out.println(review + " " + username + " " + rating);
+					PrintWriter out = response.getWriter();
+					out.println(review + "|" + username + "|" + rating);
+					t.setDone(true);
+					break;			
+//					t = new TestThread(spaces.get(index).getLocationID());
+//					t.start();
+//					session.setAttribute("thread", t);
+				}
+			}
+		} 
+		
+		else if (action.equalsIgnoreCase("signOut")) {
 			
 	        session.setAttribute("user", null); 
 	        session.setAttribute("username", null);

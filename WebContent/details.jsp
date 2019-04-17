@@ -87,7 +87,6 @@
 				}
 			})	
 		}
-		window.onload = user();
 	</script>
 	<script>
 		function initialize() {
@@ -149,7 +148,7 @@
 		  <div class="modal-content" style = "border-radius: 3vh; width: 30%; top: 40%">
 		    <span class="close" onclick ="close1()">&times;</span>
 		    <p style = "font-size:50px; text-align: center;">Submit a review</p>
-		    <form id = "rev"method="GET" action = "review">
+		    <form id = "rev">
 			    <textarea id = "reviewT" name = "reviewT" type = "text" style="font-size:50px;display: block; height: 25vh; width: 20vw; margin-left: auto; margin-right: auto;" value = ""></textarea>
 			    <input id = "ratingT" name = "ratingT" type = "text" style = "display: none" value = <%=currentSearch.getRating()%>>
 			    <input id = "spaceID" name = "spaceID" type = "text" style = "display: none"value = <%=currentSearch.getLocationID() %>>
@@ -165,33 +164,48 @@
 				</div>
 				<input type = "submit" style ="position: relative; top: 1vh;left: -1vw; width: 3vw; height: 4vh">
 		    </form>
+		    <script>
+		    $("#rev").submit(function(e) {
+
+		        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+		        var form = $(this);
+
+		        $.ajax({
+		               type: "POST",
+		               url: 'review',
+		               data: form.serialize(), // serializes the form's elements.
+		             });
+		    	});
+		    	close1();
+		    </script>
 		  </div>
 		</div>
 		<!-- Persistent top bar -->
 		<div id = "header">
-			<a href="index.jsp" id = "logo">
+			<a href="index.jsp"  id = "logo">
 				Sctudy
 			</a>
 			<div id="out">
 				<div class ="upper" id = "login">
-					<a href="login.jsp" id = "login" >
+					<a href="login.jsp"  id = "login" >
 						Login
 					</a>
 				</div>
 				<div class ="upper"id = "register">
-					<a href="register.jsp" id = "register" >
+					<a href="register.jsp"  id = "register" >
 						Register
 					</a>
 				</div>
 			</div>
 			<div id="in">
 				<div class ="upper" id = "profile">
-					<a href="profile" id = "login" >
+					<a href="profile"  id = "login" >
 						Profile
 					</a>
 				</div>
 				<div class ="upper" id = "logout">
-					<a href="login?loggedout=true" id = "register">
+					<a href="login?loggedout=true"  id = "register">
 						Log Out
 					</a>
 				</div>
@@ -308,7 +322,7 @@
 		</script>
 		<!-- Review Table: will ultimately put this in a for loop to list the proper amount of reviews -->
 		<div class="reviews">
-			<table class = "reviewTable">
+			<table class = "reviewTable" id="reviewTable">
 			<%
 				int i;
 				for(i = 0; i < size; i++) {
@@ -327,9 +341,70 @@
 			<%
 				}
 			%>
+			<script>
+			function handleData(result) {
+				var res = result.split("|");
+				res[2] = res[2] + '/5';
+				res[2] = res[2].replace(/\s+/g, '');
+				$('<tbody class="revBody">').html(
+						'<tr>' +
+						'<td class="poop"><b id="nam">' + res[1] + '</b> &nbsp; &nbsp; &nbsp; <b>Rating: </b>' + res[2] + '</td>' + 
+						'<td></td>' + 
+						'</tr>' +
+						'<tr>' + 
+						'<td class="poop" id="rebs"><b>Review: </b>' + res[0] +  '</td>' +
+						'</tr>'
+				).appendTo('#reviewTable')
+				
+				
+				
+				
+				
+				
+				//document.write('<tbody class="revBody">');
+				//document.write('<tr>');
+				//document.write('<td class="poop"><b id="namesy"></b> &nbsp; &nbsp; &nbsp; <b>Rating:</b> <ins id="insert"></ins></td>');
+				//document.write('<td></td>');
+				//document.write('</tr>');
+				//document.write('<tr>');
+				//document.write('<td class="poop" id="rebs"><b>Review:</b> </td>');
+				//document.write('</tr>');
+				//document.write('</tbody>');
+				//document.getElementById("namesy").innerHTML = res[0];
+				//document.getElementById("insert").innerHTML = res[1];
+				//document.getElementById("rebs").innerHTML = res[2];
+			}
+			function test() {
+				$.ajax({
+					url: "hack",
+					data: {
+						action: "test"
+					},
+					success: function(result) {
+						handleData(result);
+					}
+				});
+				
+			}
+			</script>
 			</table>
 		</div>
-		
+		<script>
+		test();
+		window.onbeforeunload=logout;
+		function logout(){
+			$.ajax({
+				url: "hack",
+				data: {
+					action: "leaving"
+				},
+				async: true,
+				success: function(result) {	
+				}
+			});
+			return null;
+		}
+		</script>
 	</body>
 </html>
 

@@ -11,11 +11,46 @@ import java.sql.Statement;
 public class TestThread extends Thread{
 	
 	private int LocationID;
-	
+	private volatile Boolean done;
+	public volatile Boolean check;
+	private String username;
+	private String review;
+	private int rating;
 	public TestThread(int LocationID) {
 		this.LocationID = LocationID;
+		done = false;
+		check = false;
 	}
-	
+	public Boolean getDone() {
+		return done;
+	}
+	public void setDone(Boolean d) {
+		done = d;
+	}
+	public Boolean getCheck() {
+		return check;
+	}
+	public void setCheck(Boolean c) {
+		check = c;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getReview() {
+		return review;
+	}
+	public void setReview(String review) {
+		this.review = review;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
 	public void run() {
 		Connection conn = null;
 	    Statement st = null;
@@ -26,7 +61,7 @@ public class TestThread extends Thread{
 	    try {
 	    	
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=root");
+	    	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sctudy?user=root&password=root");
 	    	
 	    	ps=conn.prepareStatement("SELECT * from reviews");       
 	    	rs = ps.executeQuery();
@@ -42,7 +77,7 @@ public class TestThread extends Thread{
 	
 		
 		try {
-			while(true) {
+			while(!done) {
 				int tableSize = 0;
 				sleep(500);
 				ps=conn.prepareStatement("SELECT * from reviews");       
@@ -58,12 +93,24 @@ public class TestThread extends Thread{
 					rs = ps.executeQuery();
 					rs.next();
 					int reviewLocation = rs.getInt("locationID");
-					if(reviewLocation == this.LocationID) {
+					if(reviewLocation == this.LocationID) {		
+						review = rs.getString("review");
+						rating = rs.getInt("rating");
+						int userID = rs.getInt("userID");
 						
-						System.out.println(rs.getString("review"));
+						
+						ps = conn.prepareStatement("SELECT username from users where userID=?"); //get users
+						ps.setInt(1, userID);
+						rs = ps.executeQuery();
+						if(rs.next()) {
+							username = (rs.getString("username"));
+						}
+						check = true;
 					}
+					currentTableSize = tableSize;
 				}
 			}
+			System.out.println("done");
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -85,9 +132,17 @@ public class TestThread extends Thread{
 			}
 		}
 	}
-	public static void main (String [] args) {
-		Thread t = new TestThread(1);
-		t.start();
-	}
+//	@SuppressWarnings("deprecation")
+//	public static void main (String [] args) {
+//		Thread t = new TestThread(1);
+//		t.start();
+//		while(true) {
+//			double i = Math.random();
+//			System.out.println(i);
+//			if(i > 0.99)
+//				break;
+//		}
+//		t.stop();
+//	}
 		
 }

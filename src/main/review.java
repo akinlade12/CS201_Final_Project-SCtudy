@@ -46,40 +46,35 @@ public class review extends HttpServlet {
 	    PreparedStatement ps = null;
 	    int spaceID = Integer.parseInt(request.getParameter("spaceID"));
 	    Double currRating = Double.parseDouble(request.getParameter("ratingT"));
-	    Double userRating = Double.parseDouble(request.getParameter("rating"));
+	    int userRating = Integer.parseInt((request.getParameter("rating")));
 	    String review = request.getParameter("reviewT");
 	    Double numbRatings = 0.0;
-	    String userID = "";
-	    String photoURL = "";
+	    int userID = -1;
 	    
 	    String username = "Username";
 		if (session.getAttribute("loggedIn") != null) {
 			username = (String) session.getAttribute("username");
 		}
-	    
+	    System.out.println(username);
 	    try {
 	    	
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=root");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sctudy?user=root&password=root");
 	    	st = conn.createStatement();
 	    	rs = st.executeQuery("SELECT * from studySpaces");
 	    	while(rs.next()) {
 	    		
 	    		if((int)rs.getObject(1) == spaceID) {
-	    			numbRatings = (Double) rs.getObject(15);
-	    			currRating = (Double) rs.getObject("overallRating");
-	    			currRating = (((numbRatings) * currRating) + userRating) / (numbRatings + 1.0);
-	    			photoURL = (String) rs.getObject(3);
-	    			
-
-	    			
+	    			numbRatings =  rs.getDouble("numRatings");
+	    			currRating = rs.getDouble("rating");
+	    			currRating = (((numbRatings) * currRating) + userRating) / (numbRatings + 1.0);			
 	    		}
 	    		
 	    	}
 	    	
-	    	ps=conn.prepareStatement("UPDATE studySpaces set overallRating = ?, numberRatings = ? ");
-	    	ps.setString(1,Double.toString(currRating)); 
-	    	ps.setString(2, Double.toString(numbRatings + 1.0));       
+	    	ps=conn.prepareStatement("UPDATE studySpaces set rating=?, numRatings=?");
+	    	ps.setDouble(1,currRating); 
+	    	ps.setDouble(2, numbRatings + 1.0);       
 	    	ps.executeUpdate();
 	    	
 	    } catch (SQLException sqle) {
@@ -105,23 +100,24 @@ public class review extends HttpServlet {
 	    
 	    try {
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	        conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=Toyosi12");
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sctudy?user=root&password=root");
 	    	
 	    	st = conn.createStatement();
 	    	rs2 = st.executeQuery("SELECT * from users");
 	    	while(rs2.next()) {
-	    		if ((String)rs2.getObject("username") == username) {
-	    			userID = (String) rs2.getObject("userID");
+	    		if (rs2.getString("username").contentEquals(username)) {
+	    			userID = rs2.getInt("userID");
+	    			break;
 	    		}
-	    		
-	    		ps = conn.prepareStatement("INSERT INTO reviews(userID,locationID,review,reviewPhotoURL,overallRating) VALUES(?,?,?,?,?)");
-		    	ps.setString(1, userID); 
-		    	ps.setString(2,Integer.toString(spaceID));
-		    	ps.setString(3, review);
-		    	ps.setString(4,photoURL);
-		    	ps.setString(5, Double.toString(currRating));
-		    	ps.executeUpdate();
 	    	}
+	    	
+	    	ps = conn.prepareStatement("INSERT INTO reviews(userID,locationID,review,rating) VALUES(?,?,?,?)");
+	    	System.out.println(userID);
+	    	ps.setInt(1, userID); 
+	    	ps.setInt(2,spaceID);
+	    	ps.setString(3, review);
+	    	ps.setInt(4, userRating);
+	    	ps.executeUpdate();
 	    	
 	    } catch (SQLException sqle) {
 	    	System.out.println (sqle.getMessage());
@@ -142,9 +138,6 @@ public class review extends HttpServlet {
 	    		System.out.println(sqle.getMessage());
 	    	}
 	    }
-		
-		RequestDispatcher dispatch = getServletContext().getRequestDispatcher(nextPage);
-	    dispatch.forward(request, response);	
 	    
 	    }
 
