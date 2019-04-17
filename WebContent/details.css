@@ -83,7 +83,7 @@ th{
 	width: 100%;
 	position: absolute;
 	left: 4vw;
-	bottom: 0vh;
+	bottom: 1vh;
 }
 .reviewTable{
 	display: block;
@@ -101,6 +101,7 @@ th{
 	border-radius: 15px;
 	background-color: rgb(140, 140, 140, .6);
 	color: black;
+	overflow: auto;
 }
 .revBody{
 	border-color: #49669D;
@@ -148,7 +149,7 @@ th{
 
 #resultscontainer{
 	position: absolute;
-	bottom: 0vh;
+	bottom: 1vh;
 	left: 60vw;
 	height: 23vw;
 	width: 30vw;
@@ -268,4 +269,10 @@ i, .poop {
 }
 #nam{
 	color: #4BA5FF;
+}
+.checked{
+	color: orange;
+}
+body{
+	overflow: hidden;
 }

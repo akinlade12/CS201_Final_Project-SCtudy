@@ -274,3 +274,8 @@ img {
 #login, #register{
 	color: black;
 }
+#submit{
+	position: absolute;
+	bottom: 2vh;
+	left: 7.5vw;
+}

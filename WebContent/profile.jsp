@@ -92,6 +92,11 @@
 			<div id="about">
 				About: <%=about %>
 			</div>
+			<div id="submitbutton">
+				<form action="submit.jsp">
+					<button type="submit" id="submit"  style="font-size: 20px; background-color: rgb(140, 140, 140, .6); border-radius: 10px;">Submit a Spot</button>
+				</form>
+			</div>
 		</div>
 	</div>
 	<div id="Favorite">Favorites</div>	

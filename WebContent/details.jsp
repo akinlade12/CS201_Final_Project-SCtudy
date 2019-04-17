@@ -28,9 +28,6 @@
 	else
 		size = users.size();
 	
-	System.out.println(users.size());
-	System.out.println(ratings.size());
-	System.out.println(reviews.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -142,9 +139,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title><%=currentSearch.getName() %></title>
-		<link rel="stylesheet" type="text/css" href="details.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="details.css" />
 	</head>
 	<body background="background.jpg">
 		<div id="myModal" class="modal">
@@ -315,7 +312,6 @@
 			<%
 				int i;
 				for(i = 0; i < size; i++) {
-					System.out.println(i);
 			%>
 			<tbody class="revBody">
 			
@@ -325,7 +321,6 @@
 				</tr>
 				<tr>
 					<td class="poop"><b>Review:</b> <%=reviews.get(i) %></td>
-					<td id="contents">  </td>
 				</tr>
 			
 			</tbody> 

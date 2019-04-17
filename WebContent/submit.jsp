@@ -55,7 +55,8 @@
 				}
 			</script>
 		</div>
-	<div class="submit">
+		<div id="title">Submit a Spot</div>
+		<div class="submit">
 			<div class = "submit-div">
 				<form class="submitForm" action="submit" method="POST">
 	  				 <input id="submitField" class="submitField" name="submitField" type="text" placeholder="Study Spot Name" aria-label="Submit" required><br><br>
@@ -78,7 +79,7 @@
 	 				<button class="btn btn-danger" onclick="submitForm()" id="submitButton">Submit</button>
 					
 					<div class = "params">
-						<div style = " float:left;" id = "1">
+						<div style = "float:left;" id = "1">
 							<div class="input-group mb-3">
 				  				<div class="input-group-prepend" >
 				   					 <label class="input-group-text" for="inputGroupSelect01">Outlet Availability</label>

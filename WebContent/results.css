@@ -233,10 +233,10 @@ img {
 }
 #out{
 	position: absolute;
-	right: 3vw;
+	right: 4vw;
 	top: 1vh;
-	width:9vw;
-	height: 3vh;
+	width: 10vw;
+	height: 4vh;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -259,6 +259,4 @@ img {
 #login, #register{
 	color: black;
 	width: 4vw;
-	white-space: no-wrap;
-	overflow: hidden;
 }

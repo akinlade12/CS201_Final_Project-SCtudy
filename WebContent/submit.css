@@ -81,6 +81,26 @@ input {
 #login, #register{
 	color: black;
 }
-
-
-
+#title{
+	font-size: 60pt;
+	position: absolute;
+	top: 6vh;
+	left: 36vw;
+}
+.input-group-text{
+	width: 8.5vw;
+	text-align: center;
+}
+.input-group mb-3{
+	width: 16vw;
+}
+#submitbutton{
+	height: 5vh;
+	width: 20vw;
+	font-size: 50vh;
+}
+#1{
+	position: absolute;
+	bottom: 20vh;
+	width: 30vw;
+}

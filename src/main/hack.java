@@ -138,7 +138,6 @@ public class hack extends HttpServlet {
 			    dispatch.forward(request, response);
 			    return;
 			}
-			return;
 		}
 		
 		
@@ -239,7 +238,6 @@ public class hack extends HttpServlet {
 			    dispatch.forward(request, response);
 			    return;
 			}
-			return;
 		}
 		
 		String action = request.getParameter("action");
