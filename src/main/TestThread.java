@@ -26,7 +26,7 @@ public class TestThread extends Thread{
 	    try {
 	    	
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=Toyosi12");
+	    	conn = DriverManager.getConnection("jdbc:mysql://localhost/Sctudy?user=root&password=root");
 	    	
 	    	ps=conn.prepareStatement("SELECT * from reviews");       
 	    	rs = ps.executeQuery();
