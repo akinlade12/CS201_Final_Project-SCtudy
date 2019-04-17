@@ -32,12 +32,12 @@
 			</div>
 			<div id="in">
 				<div class ="upper" id = "profile">
-					<a href="profile" id = "login" >
+					<a href="profile" id = "profile" >
 						Profile
 					</a>
 				</div>
 				<div class ="upper" id = "logout">
-					<a href="login?loggedout=true" id = "register">
+					<a href="login?loggedout=true" id = "logout">
 						Log Out
 					</a>
 				</div>
@@ -85,6 +85,7 @@
 		<div id="info">
 			*Check boxes of your required parameters
 		</div>
+		
 		<div id = "params">
 			<div style = " float:left; margin-right: 40px;" id = "1">
 				<div class="input-group mb-3">
@@ -92,9 +93,9 @@
 						<input type="checkbox" id = "outlets">
 					</div>
 	  				<div class="input-group-prepend" >
-	   					 <label class="input-group-text" for="inputGroupSelect01">Outlet Availability</label>
+	   					 <label class="input-group-text" for="inputGroupSelect01" style="width: 8vw; height: 4vh;">Outlet Availability</label>
 	  				</div>
-	 				<select class="custom-select" id="outletAvailability">
+	 				<select class="custom-select" id="outletAvailability" style="width: 6vw; height: 4vh;">
 	   					<option selected>Choose...</option>
 	   					<option value="Sparse">Sparse</option>
 	    			 	<option value="Available">Available</option>
@@ -108,9 +109,9 @@
 						<input type="checkbox" id = "seats">
 					</div>
 	  				<div class="input-group-prepend">
-	   					 <label class="input-group-text" for="inputGroupSelect01">Seating Types</label>
+	   					 <label class="input-group-text" for="inputGroupSelect01" style="width: 8vw; height: 4vh;">Seating Types</label>
 	  				</div>
-	 				<select class="custom-select" id="seatingTypes">
+	 				<select class="custom-select" id="seatingTypes" style="width: 6vw; height: 4vh;">
 	   					<option selected>Choose...</option>
 	   					<option value="Couch">Couch</option>
 	    			 	<option value="Chair">Chair</option>
@@ -120,15 +121,15 @@
 			</div>
 		</div>
 		<div id = "params2">
-			<div style = " float:left; margin-right: 75px;" id = "1">
+			<div style = " float:left; margin-right: 40px;" id = "1">
 				<div class="input-group mb-3">
 					<div style = " margin-right: 10px; margin-top:5px">
 						<input type="checkbox" id = "lights">
 					</div>
 	  				<div class="input-group-prepend" >
-	   					 <label class="input-group-text" for="inputGroupSelect01">Light Source</label>
+	   					 <label class="input-group-text" for="inputGroupSelect01" style="width: 8vw; height: 4vh;">Light Source</label>
 	  				</div>
-	 				<select class="custom-select" id="lightingTypes">
+	 				<select class="custom-select" id="lightingTypes" style="width: 6vw; height: 4vh;">
 	   					<option selected>Choose...</option>
 	   					<option value="LED">LED</option>
 	    			 	<option value="Windows">Windows</option>
@@ -142,9 +143,9 @@
 						<input type="checkbox" id = "noise">
 					</div>
 	  				<div class="input-group-prepend">
-	   					 <label class="input-group-text" for="inputGroupSelect01">Noise Scale</label>
+	   					 <label class="input-group-text" for="inputGroupSelect01" style="width: 8vw; height: 4vh;">Noise Scale</label>
 	  				</div>
-	 				<select class="custom-select" id="noiseLevel">
+	 				<select class="custom-select" id="noiseLevel" style="width: 6vw; height: 4vh;">
 	   					<option selected>Choose...</option>
 	   					<option value="1">1</option>
 	    			 	<option value="2">2</option>
@@ -156,15 +157,15 @@
 			</div>
 		</div>
 		<div id = "params3">
-			<div style = " float:left; margin-right: 56px;" id = "1" >
+			<div style = " float:left; margin-right: 40px;" id = "1" >
 				<div  class="input-group mb-3">
 					<div style = " margin-right: 10px; margin-top:5px">
 						<input type="checkbox" id = "inOrOut">
 					</div>
 	  				<div class="input-group-prepend">
-	   					 <label class="input-group-text" for="inputGroupSelect01">Indoor/Outdoor</label>
+	   					 <label class="input-group-text" for="inputGroupSelect01" style="width: 8vw; height: 4vh;">Indoor/Outdoor</label>
 	  				</div>
-	 				<select class="custom-select" id="indoorOutdoor">
+	 				<select class="custom-select" id="indoorOutdoor" style="width: 6vw; height: 4vh;">
 	   					<option selected>Choose...</option>
 	   					<option value="Indoor">Indoor</option>
 	    			 	<option value="Outdoor">Outdoor</option>
@@ -177,9 +178,9 @@
 						<input type="checkbox" id = "cafe">
 					</div>
 	  				<div class="input-group-prepend" >
-	   					 <label class="input-group-text" for="inputGroupSelect01">Cafe Availability</label>
+	   					 <label class="input-group-text" for="inputGroupSelect01" style="width: 8vw; height: 4vh;">Cafe Availability</label>
 	  				</div>
-	 				<select class="custom-select" id="cafeAvailability">
+	 				<select class="custom-select" id="cafeAvailability" style="width: 6vw; height: 4vh;">
 	   					<option selected>Choose...</option>
 	   					<option value="Yes">Yes</option>
 	    			 	<option value="No">No</option>
@@ -188,15 +189,15 @@
 			</div >
 		</div>
 		<div id = "params4">
-			<div style = " float:left; margin-right: 72px;" id = "1" >
+			<div style = " float:left; margin-right: 40px;" id = "1" >
 				<div  class="input-group mb-3">
 					<div style = " margin-right: 10px; margin-top:5px">
 						<input type="checkbox" id = "hoursOpen">
 					</div>
 	  				<div class="input-group-prepend">
-	   					 <label class="input-group-text" for="inputGroupSelect01">Hours(Open)</label>
+	   					 <label class="input-group-text" for="inputGroupSelect01" style="width: 8vw; height: 4vh;">Hours(Open)</label>
 	  				</div>
-	 				<select class="custom-select" id="hourOpen">
+	 				<select class="custom-select" id="hourOpen" style="width: 6vw; height: 4vh;">
 	   					<option selected>Choose...</option>
 	   					<option value="12am">12am</option>
 	    			 	<option value="1am">1am</option>
@@ -231,9 +232,9 @@
 						<input type="checkbox" id = "hoursClose">
 					</div>
 	  				<div class="input-group-prepend" >
-	   					 <label class="input-group-text" for="inputGroupSelect01">Hours(Close)</label>
+	   					 <label class="input-group-text" for="inputGroupSelect01" style="width: 8vw; height: 4vh;">Hours(Close)</label>
 	  				</div>
-	 				<select class="custom-select" id="hourClose">
+	 				<select class="custom-select" id="hourClose" style="width: 6vw; height: 4vh;">
 	   					<option selected>Choose...</option>
 	   					<option value="12am">12am</option>
 	    			 	<option value="1am">1am</option>
