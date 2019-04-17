@@ -326,7 +326,7 @@
 					<td id="contents">  </td>
 				</tr>
 			
-			</tbody>
+			</tbody> 
 			<%
 				}
 			%>
