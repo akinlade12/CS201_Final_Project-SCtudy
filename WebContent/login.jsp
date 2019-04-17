@@ -46,7 +46,7 @@
 					<br/>
 				</div>
 				<div class="password">
-					Password<br/><input class="passinput" id="password" type="text" name="password">
+					Password<br/><input class="passinput" id="password" type="password" name="password">
 					<br/>
 					<strong><div id="errorMessage"></div></strong>
 				</div>
