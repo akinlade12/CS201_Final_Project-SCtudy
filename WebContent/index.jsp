@@ -55,7 +55,7 @@
 				else if(!logged) {
 					$("#in").hide();
 					$("#out").show();
-				}
+				} s
 			</script>
 		</div>
 		<div id="motto">Find your space...</div>
