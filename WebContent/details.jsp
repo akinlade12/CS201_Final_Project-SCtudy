@@ -43,7 +43,7 @@
 	 function show() {
 			var modal = document.getElementById('myModal');
 			var span = document.getElementsByClassName("close")[0];
-	 		 modal.style.display = "block";
+	 		 modal.style.display = "flex";
 	}
 
 	// When the user clicks on <span> (x), close the modal
@@ -143,47 +143,6 @@
 		<link rel="stylesheet" type="text/css" href="details.css" />
 	</head>
 	<body background="background.jpg">
-		<div id="myModal" class="modal">
-		  <!-- Modal content -->
-		  <div class="modal-content" style = "border-radius: 3vh; width: 30%; top: 40%">
-		    <span class="close" onclick ="close1()">&times;</span>
-		    <p style = "font-size:50px; text-align: center;">Submit a review</p>
-		    <form id = "rev">
-			    <textarea id = "reviewT" name = "reviewT" type = "text" style="font-size:50px;display: block; height: 25vh; width: 20vw; margin-left: auto; margin-right: auto;" value = ""></textarea>
-			    <input id = "ratingT" name = "ratingT" type = "text" style = "display: none" value = <%=currentSearch.getRating()%>>
-			    <input id = "spaceID" name = "spaceID" type = "text" style = "display: none"value = <%=currentSearch.getLocationID() %>>
-			    <div style = "position: relative; left: 19vw; top: 1vh; display: inline-block">
-			    <p style = "font-size:50px; display: inline-block; margin-right: .5vw">Rating</p>
-			    <select id = "rating" name = "rating" style = "width: 3vw" >
-				  <option value="1">1</option>
-				  <option value="2">2</option>
-				  <option value="3">3</option>
-				  <option value="4">4</option>
-				  <option value="5">5</option>
-				</select>
-				</div>
-				<input type = "submit" style ="position: relative; top: 1vh;left: -1vw; width: 3vw; height: 4vh">
-		    </form>
-		    <script>
-		    $("#rev").submit(function(e) {
-
-		        e.preventDefault(); // avoid to execute the actual submit of the form.
-
-		        var form = $(this);
-
-		        $.ajax({
-		               type: "POST",
-		               url: 'review',
-		               data: form.serialize(), // serializes the form's elements.
-		               success: function(data) {
-		            	   close1();
-		               }
-		             });
-		    	});
-		    	
-		    </script>
-		  </div>
-		</div>
 		<!-- Persistent top bar -->
 		<div id = "header">
 			<a href="index.jsp"  id = "logo">
@@ -213,6 +172,48 @@
 					</a>
 				</div>
 			</div>
+		</div>
+		<div id="myModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content" >
+		    <span class="close" onclick ="close1()">&times;</span>
+		    <p id="stuff" style = "font-size:50px;">Submit a review</p>
+		    <form id = "rev">
+			    <textarea id="reviewT" name = "reviewT" type = "text" value = ""></textarea>
+			    <input id = "ratingT" name = "ratingT" type = "text" style = "display: none" value = <%=currentSearch.getRating()%>>
+			    <input id = "spaceID" name = "spaceID" type = "text" style = "display: none"value = <%=currentSearch.getLocationID() %>>
+			    <div id="ratingblock">
+			    <p id="ratingname">Rating</p>
+			    <select id = "rating" name = "rating" style = "width: 3vw" >
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+				</select>
+				</div>
+				<input id="sub" type = "submit">
+		    </form>
+		    <script>
+		    $("#rev").submit(function(e) {
+
+		        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+		        var form = $(this);
+
+		        $.ajax({
+		               type: "POST",
+		               url: 'review',
+		               data: form.serialize(), // serializes the form's elements.
+		               success: function(data) {
+		            	   close1();
+		               }
+		             });
+		    	});
+		    	
+		    </script>
+		  </div>
+		</div>
 			<script>
 				var logged = <%= logged%>;
 				if(logged == null) {
@@ -235,6 +236,7 @@
 			<div class="reviewstars">
 				<%
 					int rating = (int) Math.round(currentSearch.getRating());
+					System.out.println(rating + " " + currentSearch.getRating());
 					int j;
 					for(j = 0; j < rating; j++) { 
 				%>

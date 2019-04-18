@@ -24,6 +24,7 @@
 	margin-top: 1%; 
 	float: right;
 	text-decoration: none;
+	white-space: nowrap;
 }
 #sidebar{
 	background: rgb(128,128,128, 0.50);

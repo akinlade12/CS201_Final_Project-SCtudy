@@ -112,3 +112,15 @@
 	top: 8vh;
 	left: 32vw;
 }
+#container{
+	border-color: #49669D;
+	border-style: solid;
+	border-radius: 2vw;
+	background-color: #F0F0F0;
+	height: 50vh;
+	width: 40vw;
+	position: absolute;
+	top: 35vh;
+	left: 28.5vw;
+	
+}

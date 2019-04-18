@@ -379,7 +379,7 @@
 						StudySpace space = spaces.get(i);
 						String ref = "hack?index=" + Integer.toString(i);
 						int rating = (int) Math.round(space.getRating());
-						
+						System.out.println(space.getName() + " " + rating);
 						String c;
 						if(space.getCafe())
 							c = "Yes";
